@@ -1,3 +1,2 @@
-Project Squirrel
 
-Isaac was here
+Project Squirrel
