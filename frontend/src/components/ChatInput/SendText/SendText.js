@@ -10,7 +10,7 @@ export default class SendText extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="vertical container">
         <div className="row">
           <section className="SendText pull-right">
             <button id="SendTextBtn" type="button">Submit</button>
