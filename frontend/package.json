@@ -11,6 +11,7 @@
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-textarea-autosize": "^5.0.7",
     "redux": "^3.7.1",
     "socket.io": "^2.0.3"
   },

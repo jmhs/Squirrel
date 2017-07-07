@@ -1,0 +1,7 @@
+.textareaStyle {
+  padding: 10px 8px;
+  border: 1px solid rgba(39,41,43,.15);
+  font-size: 15px;
+  width: 80vw;
+  text-overflow: hidden;
+};

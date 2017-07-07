@@ -9,10 +9,7 @@ export default class ChatInput extends React.Component {
 
   render() {
     return (
-      <div>
-
-
-      
+      <div className = "row">
       <TextInput />
       <SendText />
       </div>
