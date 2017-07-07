@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
-import TextInput from './components/TextInput/textInput';
-import SendText from './components/SendText/sendText';
+import TextInput from './components/TextInput/TextInput';
+import SendText from './components/SendText/SendText';
 
 export default class ChatInput extends React.Component {
   constructor(props) {
