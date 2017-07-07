@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import BurgerBtn from './BurgerBtn/BurgerBtn';
+import Menu from './Menu/Menu';
 
 
 export default class NavBar extends React.Component {
@@ -14,7 +14,7 @@ export default class NavBar extends React.Component {
   render() {
     return (
       <div className="row">
-        <BurgerBtn/>
+        <Menu/>
       </div>
     );
   }
