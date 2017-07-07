@@ -7,8 +7,8 @@ import './App.css';
 import NavBar from '../NavBar/NavBar';
 import ChatField from '../ChatField/ChatField';
 import ChatInput from '../ChatInput/ChatInput';
-
-
+// const socket = io();
+// console.log(socket)
 
 class App extends Component {
   render() {
