@@ -7,6 +7,17 @@ import logger from 'morgan';
 import path from 'path';
 import lessMiddleware from 'less-middleware';
 import index from './routes/index';
+import mongoose from 'mongoose';
+
+// Setup Mongoose connection to MongoDB
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/squirreldb', {
+                  useMongoClient: true,});
+mongoose.connection.on('error', (err) => {
+  console.error(err);
+  console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
+  process.exit();
+});
 
 const app = express();
 const debug = Debug('backend:app');
