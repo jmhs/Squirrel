@@ -8,6 +8,29 @@ import path from 'path';
 import lessMiddleware from 'less-middleware';
 import index from './routes/index';
 import mongoose from 'mongoose';
+import socket from 'socket.io';
+
+const app = express();
+const debug = Debug('backend:app');
+
+// //App setup
+
+// const server = require('https').Server(option, app);
+// const io = require('socket.io')(server)
+
+var server = app.listen(3001,function(){
+  console.log('listening to port 3001')
+});
+
+var io = socket(server);
+
+io.on('connection', function(socket){
+  console.log('made connection');
+  socket.on("new-message", function(msg) {
+    console.log(msg);
+    io.emit("receive-message",msg);
+  })
+});
 
 // Setup Mongoose connection to MongoDB
 mongoose.Promise = global.Promise;
@@ -19,8 +42,9 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 
-const app = express();
-const debug = Debug('backend:app');
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
