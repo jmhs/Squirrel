@@ -13,15 +13,24 @@ import socket from 'socket.io';
 const app = express();
 const debug = Debug('backend:app');
 
-//App setup
+// //App setup
+
+// const server = require('https').Server(option, app);
+// const io = require('socket.io')(server)
 
 var server = app.listen(3001,function(){
   console.log('listening to port 3001')
 });
 
-var io = socket(server)
+var io = socket(server);
 
-io.on('connection', function(socket){console.log('made connection')})
+io.on('connection', function(socket){
+  console.log('made connection');
+  socket.on("new-message", function(msg) {
+    console.log(msg);
+    io.emit("receive-message",msg);
+  })
+});
 
 // Setup Mongoose connection to MongoDB
 mongoose.Promise = global.Promise;
