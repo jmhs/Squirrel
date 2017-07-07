@@ -6,7 +6,7 @@ import './App.css';
 //import components
 import NavBar from '../NavBar/NavBar';
 import ChatField from '../ChatField/ChatField';
-import ChatInput from '../ChatInput/chatInput';
+import ChatInput from '../ChatInput/ChatInput';
 
 
 
@@ -16,7 +16,8 @@ class App extends Component {
       <div className="App container-fluid">
 
         <NavBar/>
-
+        <ChatField/>
+        <ChatInput/>
       </div>
     );
   }
