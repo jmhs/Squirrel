@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import { stack as Menu } from 'react-burger-menu';
 
-export default class MyComponent extends React.Component {
+export default class MenuLink extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -18,5 +18,5 @@ export default class MyComponent extends React.Component {
   }
 }
 
-.propTypes = {
+MenuLink.propTypes = {
 };
