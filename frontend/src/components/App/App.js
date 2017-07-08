@@ -3,8 +3,15 @@ import logo from './logo.svg';
 import './App.css';
 //import components
 import NavBar from '../NavBar/NavBar';
+<<<<<<< HEAD
 
 const io = require('socket.io-client/dist/socket.io.js');
+=======
+import ChatField from '../ChatField/ChatField';
+import ChatInput from '../ChatInput/ChatInput';
+// const socket = io();
+// console.log(socket)
+>>>>>>> 1eb8c13fc4261edd677f0b38da3cb6595e84a9b9
 
 class App extends Component {
 
