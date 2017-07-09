@@ -1,0 +1,17 @@
+#video-background {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  z-index: -100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100vw;
+  object-fit: cover;
+}
+
+.videoLoop {
+  height: 600px;
+
+}

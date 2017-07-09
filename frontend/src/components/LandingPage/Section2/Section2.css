@@ -1,0 +1,23 @@
+#sponsor {
+  height: 120px;
+  background-color: #9FD4E1;
+  text-align: center;
+  padding-top: 39px;
+
+}
+
+.sponsorIcon {
+  color: white;
+}
+
+.sponsorName {
+  padding-left: 10px;
+  font-family: "Montserrat", arial, sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+}
+
+.snapC {
+  margin-left: 25px;
+  margin-right: -25px;
+}

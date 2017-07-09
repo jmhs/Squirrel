@@ -1,13 +1,9 @@
 import React, {PropTypes} from 'react';
 
-// import css files
-import "./css/style.css";
-import "./css/simple-line-icons.css";
-//import "./css/owl.theme.default.min.css";
-//import "./css/owl.carousel.min.css";
-import "./css/magnific-popup.css";
-import "./css/icomoon.css";
-import "./css/animate.css";
+// import components for the landing page
+import Header from './Header/Header';
+import Section2 from './Section2/Section2';
+import Section3 from './Section3/Section3';
 
 
 export default class LandingPage extends React.Component {
@@ -18,15 +14,18 @@ export default class LandingPage extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        MyComponent
+        <div className="row">
+          <Header/>
+        </div>
+        <div className="row">
+          <Section2/>
+        </div>
+        <div className="row">
+          <Section3/>
+        </div>
       </div>
     );
   }
-
-  componentDidMount() {
-
-  }
-
 }
 
 LandingPage.propTypes = {
