@@ -31,7 +31,7 @@ export default class Section5 extends React.Component {
           </div>
         </div>
         <div className="col-md-4 image-wrap">
-            <img className="imgPrototype" src="https://image.ibb.co/eJomPa/iphone_blank_3.png" alt="squirrel prototype one" border={0} />
+            <img className="imgPrototype" src="https://image.ibb.co/eJomPa/iphone_blank_3.png" alt="squirrel prototype one" />
         </div>
         <div className="col-md-4 right-text-wrap">
           <div className="row text-center">

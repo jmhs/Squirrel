@@ -13,6 +13,11 @@ export default class MenuBar extends React.Component {
     return (
       <div>
         <Menu>
+          <a href="/login">
+            <i className="fa fa-fw fa-sign-in"></i>
+            <span className="menuLink">Login</span>
+          </a>
+          <hr/>
           <a href="#home">
             <i className="fa fa-fw fa-home"></i>
             <span className="menuLink">Home</span>
@@ -33,17 +38,13 @@ export default class MenuBar extends React.Component {
             <i className="fa fa-fw fa-thumbs-up"></i>
             <span className="menuLink">Satisfaction</span>
           </a>
-          <a href="#benefits">
-            <i className="fa fa-fw fa-smile-o"></i>
-            <span className="menuLink">Benefits</span>
-          </a>
           <a href="#freeTry">
             <i className="fa fa-fw fa-commenting"></i>
-            <span className="menuLink">Free Try!</span>
+            <span className="menuLink">Free Sign Up!</span>
           </a>
-          <a href="#subscribe">
+          <a href="#contact">
             <i className="fa fa-fw fa-handshake-o"></i>
-            <span className="menuLink">Subscribe Now!</span>
+            <span className="menuLink">Contact Us</span>
           </a>
           <hr/>
           <p>connect with us</p>
