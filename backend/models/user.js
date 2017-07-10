@@ -8,7 +8,8 @@ import bcrypt from 'bcrypt';
 const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
-  // To add in longitude and latitude
+  latitude: String,
+  longitude: String,
 
   facebook: String,
   tokens: Array,

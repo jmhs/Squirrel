@@ -14,7 +14,7 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', { failur
   res.redirect(req.session.returnTo || '/chat');
 });
 
-
+// LOGIN
 router.post('/LogIn', function(req, res, next) {
     passport.authenticate('local', function(error, user, info) {
         if(error) {
@@ -30,37 +30,15 @@ router.post('/LogIn', function(req, res, next) {
               console.log("Login err", "Wrong password");
               return res.json({'error':'user','message': "Wrong password"})
             }
+        // Update with user current latitude and longitude
+
+
             return res.json(user);
         });
     })(req, res, next);
 });
 
-// router.post('/login', function(req, res, next) {
-//
-//     console.log("Data: ",req.body.email, req.body.password)
-//
-//     console.log("passport.authenticate before",passport.authenticate);
-//     passport.authenticate('local', function(err, user, info) {
-//       console.log("passport.authenticate", err,user,info);
-//
-//         if (err) {
-//           console.log("Passport err", err);
-//           return res.json({'error':'database','message': "Something went seriously wrong. Contact the dev team."});
-//         }
-//         if (!user) {
-//           console.log("Could not find e-mail");
-//           return res.json({'error':'user','message': "Could not find e-mail"});
-//         }
-//         req.logIn(user, function(err) {
-//             if (err) {
-//               console.log("Login err", "Wrong password");
-//               return res.json({'error':'user','message': "Wrong password"})
-//             }
-//             return res.json({detail: info});
-//         });
-//     });
-// });
-
+// SIGNUP
 router.post('/SignUp', function(req, res, next) {
     User.findOne({ email: req.body.email }, (err, existingUser) => {
 
@@ -75,6 +53,10 @@ router.post('/SignUp', function(req, res, next) {
       let user = new User();
       user.email = req.body.email;
       user.password = req.body.password;
+      // Lat and Long pending
+      user.latitude = "";
+      user.longitude = "";
+
       user.save((err) => {
         if (err) {
           console.log("User save error");
@@ -92,6 +74,7 @@ router.post('/SignUp', function(req, res, next) {
     });
 });
 
+// LOGOUT
 router.get('/logout',(req, res, next) => {
   req.logout();
   res.redirect('/landingpage');
