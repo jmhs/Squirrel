@@ -9,6 +9,7 @@ import Chat from '../Chat/Chat'
 import LandingPage from '../LandingPage/LandingPage'
 import LogIn from '../LogIn/LogIn'
 import SignUp from '../SignUp/SignUp'
+import LoadingPage from '../LoadingPage/LoadingPage'
 
 import './App.css';
 
