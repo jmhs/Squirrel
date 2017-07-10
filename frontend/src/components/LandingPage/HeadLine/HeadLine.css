@@ -1,0 +1,24 @@
+.headline {
+  font-family: "Montserrat", arial, sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  color: white;
+  bottom: 0;
+  position: relative;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.headlineWrapper {
+  top: 300px;
+  left: 50px;
+  position: absolute;
+}
+
+.subHeading {
+  margin: 0;
+  color: white;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: .05em;
+}
