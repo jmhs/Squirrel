@@ -1,0 +1,34 @@
+#Login {
+  margin-top: 100px;
+  border: solid 1px #CCCCCC;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.or {
+  text-align: center;
+  margin: 15px;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+#Login button {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+#Login .error {
+  text-align: center;
+  font-weight: bold;
+  color: red;
+}
+
+.login {
+  text-align: center;
+  margin: 20px;
+}
+
+#loginBtn {
+  margin-bottom: 10px;
+}

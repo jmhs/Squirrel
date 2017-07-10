@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './Chat.css';
+import ChatInput from './ChatInput/ChatInput';
+import ChatField from './ChatField/ChatField';
 //import components
 import NavBar from '../NavBar/NavBar';
 
@@ -28,13 +30,6 @@ class Chat extends Component {
       socket.emit("typing", handle.value);
     });
 
-    // listen for events
-    socket.on('receive-message', (msg) => {
-      output.innerHTML += '<p><strong>' + msg.handle + ': </strong>' + msg.message + '</p>';
-    });
-    socket.on('typing', (data) => {
-      feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
-    });
 
   }
 
@@ -48,13 +43,8 @@ class Chat extends Component {
       <div className="App container-fluid">
         <NavBar/>
         <div id="mario-chat">
-          <div id="chat-window">
-            <div id="output"></div>
-            <div id="feedback"></div>
-          </div>
-          <input id="handle" type="text" placeholder="Handle"/>
-          <input id="message" type="text" placeholder="Message"/>
-          <button id="send">Send</button>
+          <ChatField/>
+          <ChatInput/>
         </div>
       </div>
     );
