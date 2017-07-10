@@ -7,7 +7,19 @@ import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
-  password: String
+  password: String,
+  // To add in longitude and latitude
+
+  facebook: String,
+  tokens: Array,
+
+  profile: {
+    name: String,
+    gender: String,
+    location: String,
+    website: String,
+    picture: String
+  }
 },{ timestamps: true});
 
 // Function name: userSchema.pre
