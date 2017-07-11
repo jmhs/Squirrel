@@ -69,7 +69,7 @@ export default class SignUp extends React.Component {
         this.setState({error: data.message});
       } else {
         console.log("AJAX: Signed up @ '/auth/signup'");
-        window.location.href = "/chat";
+        window.location.href = "/login";
       }
     }).catch((error) => {
       console.error("AJAX: Could not signup @ '/auth/signup'", error)

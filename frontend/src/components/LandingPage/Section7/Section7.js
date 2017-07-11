@@ -37,7 +37,7 @@ export default class Section7 extends React.Component {
       };
 
     return (
-      <div id="satisfaction">
+      <div>
         <div className="row SatisfactionBG">
           <div className="col-md-4 SatisfactionWord">
             <AnimationCount {...settings}/>
