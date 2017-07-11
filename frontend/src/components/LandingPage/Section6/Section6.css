@@ -1,0 +1,27 @@
+.S6carousel {
+  background-color: #9FD4E1;
+  height: 300px;
+}
+
+.carouselH {
+  text-align: center;
+  padding-top: 70px;
+}
+
+.carouselIcon {
+  border-radius: 50%;
+  height: 170px;
+}
+
+.carouselWord {
+  font-family: "Montserrat", arial, sans-serif;
+  color: white;
+}
+
+.carouselAuthor{
+  color: white;
+}
+.carouselAuthorName{
+  color: black;
+  font-weight: 700;
+}

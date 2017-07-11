@@ -1,6 +1,6 @@
 .Section3 {
   text-align: center;
-  background-color: lightgrey;
+  background-color: #ffffff;
 }
 
 .h2Word {
@@ -15,4 +15,5 @@
   color: grey;
   font-weight: 100;
   margin-top: 0;
+  margin-bottom: 25px;
 }
