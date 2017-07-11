@@ -32,3 +32,11 @@
 #loginBtn {
   margin-bottom: 10px;
 }
+
+#currLatitude {
+  display: none;
+}
+
+#currLongitude {
+  display: none;
+}
