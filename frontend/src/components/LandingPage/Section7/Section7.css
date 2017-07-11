@@ -1,0 +1,19 @@
+.SatisfactionBG {
+  background: url(https://preview.ibb.co/cGzhxv/bg_1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+}
+
+.SatisfactionWord{
+  text-align: center;
+  margin-top: 40px;
+  font-family: "Montserrat", arial, sans-serif;
+  color: white;
+  letter-spacing: 2px;
+  font-size: 60px;
+}
+
+.describtionSW {
+  font-size: 16px;
+}
