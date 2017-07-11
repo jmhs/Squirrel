@@ -14,8 +14,8 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', { failur
   res.redirect(req.session.returnTo || '/chat');
 });
 
-
-router.post('/LogIn', function(req, res, next) {
+// LOGIN
+router.post('/login', function(req, res, next) {
     passport.authenticate('local', function(error, user, info) {
         if(error) {
             console.log(error);
@@ -35,33 +35,8 @@ router.post('/LogIn', function(req, res, next) {
     })(req, res, next);
 });
 
-// router.post('/login', function(req, res, next) {
-//
-//     console.log("Data: ",req.body.email, req.body.password)
-//
-//     console.log("passport.authenticate before",passport.authenticate);
-//     passport.authenticate('local', function(err, user, info) {
-//       console.log("passport.authenticate", err,user,info);
-//
-//         if (err) {
-//           console.log("Passport err", err);
-//           return res.json({'error':'database','message': "Something went seriously wrong. Contact the dev team."});
-//         }
-//         if (!user) {
-//           console.log("Could not find e-mail");
-//           return res.json({'error':'user','message': "Could not find e-mail"});
-//         }
-//         req.logIn(user, function(err) {
-//             if (err) {
-//               console.log("Login err", "Wrong password");
-//               return res.json({'error':'user','message': "Wrong password"})
-//             }
-//             return res.json({detail: info});
-//         });
-//     });
-// });
-
-router.post('/SignUp', function(req, res, next) {
+// SIGNUP
+router.post('/signup', function(req, res, next) {
     User.findOne({ email: req.body.email }, (err, existingUser) => {
 
       console.log("Data: ",req.body.email, req.body.password)
@@ -75,6 +50,8 @@ router.post('/SignUp', function(req, res, next) {
       let user = new User();
       user.email = req.body.email;
       user.password = req.body.password;
+      user.latitude = req.body.latitude;
+      user.longitude = req.body.longitude;
       user.save((err) => {
         if (err) {
           console.log("User save error");
@@ -92,9 +69,10 @@ router.post('/SignUp', function(req, res, next) {
     });
 });
 
+// LOGOUT
 router.get('/logout',(req, res, next) => {
   req.logout();
-  res.redirect('/landingpage');
+  res.redirect('/');
 });
 
 export default router;

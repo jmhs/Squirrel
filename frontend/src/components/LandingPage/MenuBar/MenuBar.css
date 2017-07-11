@@ -1,5 +1,5 @@
 a, p {
-  color: #DDDADF;
+  color: white;
   text-decoration: none;
   font-family: 'Raleway', Arial, sans-serif;
   font-size: 1.15em;
@@ -37,7 +37,7 @@ a:focus {
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #bdc3c7;
+  background: white;
 }
 
 /* General sidebar styles */

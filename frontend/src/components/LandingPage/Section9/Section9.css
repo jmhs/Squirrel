@@ -1,0 +1,21 @@
+.contactBG {
+  height: 120px;
+  background-color: #9FD4E1;
+}
+.contactForm {
+  margin-top: 40px;
+}
+#contactBtn{
+  border-radius: 25px;
+  background-color: #61AAD7;
+  margin-top: -5px;
+  font-family: "Montserrat", arial, sans-serif;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+
+#contactBtn:hover,
+#contactBtn:focus {
+  background-color: #4c94c1;
+  text-decoration: none;
+}
