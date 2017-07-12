@@ -15,8 +15,17 @@ const app = require('../app').default;
 const debug = require('debug')('backend:server');
 const http = require('http');
 
+// import dependencies
+//const mongoose = require('mongoose');
+
 // import socket.io
 const socket = require('socket.io');
+
+// usernames which are currently connected to the chat
+let usernames = {};
+
+// rooms which are currently available in chat
+const rooms = ['roomA', 'roomB', 'roomC', 'roomD'];
 
 /**
  * Normalize a port into a number, string, or false.
@@ -64,15 +73,30 @@ const io = socket(server);
 
 io.on('connection', (socket) =>{
   console.log('made socket connection', socket.id);
-  //handle chat messages
+
+  // sort user to the rooms by geo locations
+  //app.get()
+  socket.on('userLongitude', (longitude)=> {
+    console.log(longitude);
+  });
+
+  // handle chat messages
   socket.on('new-message', (msg) => {
     console.log(msg)
-    io.sockets.emit("receive-message", msg);
+    io.sockets.in(socket.room).emit("receive-message", msg);
   });
-  //handle typing message notification
+  // handle typing message notification
   socket.on('typing', (data) => {
-    socket.broadcast.emit('typing', data);
+    socket.broadcast.in(socket.room).emit('typing', data);
   });
+
+  // // to handle chat in chat roomA
+  // socket.on('new-message', (msg) => {
+  //   console.log(msg)
+  //   io.sockets.in('roomA').emit("receive-message", msg);
+  // });
+
+
 
 });
 
