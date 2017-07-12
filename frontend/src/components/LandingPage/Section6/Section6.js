@@ -21,7 +21,7 @@ export default class Section6 extends React.Component {
       centerMode: true,
     };
     return (
-      <div className="row" id="team">
+      <div className="row">
         <div className="S6carousel">
           <Slider {...settings}>
             <div className="container-fluid">

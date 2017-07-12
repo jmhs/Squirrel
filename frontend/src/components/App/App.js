@@ -22,6 +22,7 @@ class App extends Component {
           <Route path="/chat" component={Chat}/>
           <Route path="/login" component={LogIn}/>
           <Route path="/signup" component={SignUp}/>
+          <Route path="/loadingpage" component={LoadingPage}/>
         </Switch>
       </Router>
     );

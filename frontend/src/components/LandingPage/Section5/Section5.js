@@ -9,7 +9,7 @@ export default class Section5 extends React.Component {
 
   render() {
     return (
-      <div className="row Section5" id="design">
+      <div className="row Section5">
         <div className="col-md-12 designHeading">
           <h2 className="h2Word">Better design</h2>
           <div className="col-md-6 col-md-offset-3">

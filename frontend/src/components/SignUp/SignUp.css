@@ -1,3 +1,48 @@
+.container {
+  margin-top: 5%;
+  height: 100vh;
+  width: 100vw;
+  padding: 10px 0 0 0;
+  margin: 0;
+  border-color: #43BEB6;
+}
+
+#form {
+  margin: 0 10px 10px 10px;
+}
+
+#or {
+  text-align: center;
+  font-style: italic;
+}
+
+#loginBtn {
+  background: white;
+  border-color: #43BEB6;
+  color: black;
+  margin-top: 10px;
+}
+
+#signupBtn {
+  background: #43BEB6;
+  border-color: #43BEB6;
+  color: white;
+  margin-top: 10px;
+}
+
+#homeBtn {
+  background: white;
+  border-color: #43BEB6;
+  color: black;
+  margin-top: 10px;
+}
+
+
+.panel-primary {
+  border-color: #43BEB6;
+  box-shadow: 2px 2px 2px lightgray;
+}
+
 #currLatitude {
   display: none;
 }
