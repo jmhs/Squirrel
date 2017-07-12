@@ -9,7 +9,7 @@ export default class Logo extends React.Component {
   render() {
     return (
       <div className="filler">
-        <a href="#home" className="navBrand">
+        <a href="/login" className="navBrand">
           <span className="logoBrand">SQUIRREL</span>
         </a>
       </div>

@@ -9,7 +9,7 @@ export default class Section9 extends React.Component {
 
   render() {
     return (
-      <div id="contact" >
+      <div>
         <div className="row contactBG">
           <div className="col-md-2 col-md-offset-1 contactForm">
             <input type="text" className="form-control" id="contactName" placeholder="Name" />

@@ -9,7 +9,7 @@ export default class Section8 extends React.Component {
 
   render() {
     return (
-      <div id="freeTry">
+      <div>
         <div className="container-fluid freetryBG">
           <div className="row">
             <div className="col-md-12">

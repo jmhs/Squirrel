@@ -1,4 +1,4 @@
-//Reducers take the previous state and an action, and returns the next state.
+ //Reducers take the previous state and an action, and returns the next state.
 
 
 //import socket messages to API
@@ -6,8 +6,12 @@
 
 //import { getTodos } from '../API/TodoAPI';
 //const initialTodos = getTodos();
+const initialState =  [{
+  message : "",
+  handle: ""
+}]
 
-const ChatMessages = (state = [], action) =>{
+const ChatReducer = (state = initialState, action) =>{
 
   console.log(action);
 
@@ -16,8 +20,8 @@ const ChatMessages = (state = [], action) =>{
     return [
       ...state,
       {
-        id: action.id,
-        text: action.text,
+        message: action.text.message.message,
+        handle: action.text.message.handle
       }
     ]
     break;
@@ -36,4 +40,4 @@ const ChatMessages = (state = [], action) =>{
   }
 }
 
-export default ChatMessages;
+export default ChatReducer;
