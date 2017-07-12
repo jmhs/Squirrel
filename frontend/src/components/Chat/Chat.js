@@ -25,13 +25,10 @@ class Chat extends Component {
     message.addEventListener('keypress', () => {
       socket.emit("typing", handle.value);
     });
-// listen for events
-  //  socket.on('receive-message', (msg) => {
-  //  output.innerHTML += '<p><strong>' + msg.handle + ': </strong>' + msg.message + '</p>';
-  //    });
-     socket.on('typing', (data) => {
-         feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
-       });
+
+    socket.on('typing', (data) => {
+      feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+    });
 
   }
 
