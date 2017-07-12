@@ -36,7 +36,7 @@ router.post('/login', function(req, res, next) {
               if (err) return res.json({'error':'database','message': err});
               res.json(user)
             });
-        });
+
     })(req, res, next);
 });
 
