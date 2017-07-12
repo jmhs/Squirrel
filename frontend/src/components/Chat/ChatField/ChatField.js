@@ -33,7 +33,7 @@ export default class ChatField extends React.Component {
 
     return (
       <div id="chat-window">
-        <div id="output">{renderMessages()}</div>
+        <div id="output"><ChatMessages/></div>
         <div id="feedback"></div>
       </div>
     );

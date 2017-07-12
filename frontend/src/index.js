@@ -11,12 +11,15 @@ import ChatReducer from './components/Reducers/Chat'
 import { initStore } from './components/Store/Store'
 
 const store = initStore();
-
+store.subscribe( () => {
+    const chatss = store.getState();
+    console.log(chatss);
+})
 
 ReactDOM.render(
-  //<Provider store={store}>
+  <Provider store={store}>
   <App />
-  //</Provider>
+  </Provider>
 
   , document.getElementById('root')
 );
