@@ -25,7 +25,10 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={LandingPage}/>
-          <Route path="/chat" component={Chat} />
+          <Route path="/chat/A" component={Chat} />
+          <Route path="/chat/B" component={Chat} />
+          <Route path="/chat/C" component={Chat} />
+          <Route path="/chat/D" component={Chat} />
           <Route path="/login" component={LogIn}/>
           <Route path="/signup" component={SignUp}/>
           <Route path="/loadingpage" component={LoadingPage}/>
