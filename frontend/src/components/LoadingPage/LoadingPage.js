@@ -11,7 +11,7 @@ export default class LoadingPage extends React.Component {
   render() {
     return (
       <div className="loadingContent">
-          <h1>Hang on, our elves are working hard!</h1>
+        <h1>Foraging berries...</h1>
           <ReactLoading type="cylon"
                         id="loadingImage"
                         color={444}>

@@ -19,35 +19,35 @@ export default class SignUp extends React.Component {
     };
   }
 
-  componentWillMount() {
-    var state = this.state;
-    const getLocation = () => {
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
-    }
-    const showPosition = (position) => {
-      state.latitude = position.coords.latitude;
-      state.longitude = position.coords.longitude;
-      this.setState(state)
-      console.log(state);
-    }
-    getLocation();
-    console.log(this.state.latitude.toString().length);
-  }
-
-  componentDidMount() {
-    var state = this.state;
-    if (this.state.latitude.toString().length + this.state.longitude.toString().length < 0) {
-      this.state.loading = true;
-    } else {
-      this.state.loading = false;
-    };
-    console.log(this.state.loading);
-  }
+  // componentWillMount() {
+  //   var state = this.state;
+  //   const getLocation = () => {
+  //
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition(showPosition);
+  //     } else {
+  //       console.log("Geolocation is not supported by this browser.");
+  //     }
+  //   }
+  //   const showPosition = (position) => {
+  //     state.latitude = position.coords.latitude;
+  //     state.longitude = position.coords.longitude;
+  //     this.setState(state)
+  //     console.log(state);
+  //   }
+  //   getLocation();
+  //   console.log(this.state.latitude.toString().length);
+  // }
+  //
+  // componentDidMount() {
+  //   var state = this.state;
+  //   if (this.state.latitude.toString().length + this.state.longitude.toString().length < 0) {
+  //     this.state.loading = true;
+  //   } else {
+  //     this.state.loading = false;
+  //   };
+  //   console.log(this.state.loading);
+  // }
 
   onChange = (e) => {
     var state = this.state
@@ -69,7 +69,7 @@ export default class SignUp extends React.Component {
         this.setState({error: data.message});
       } else {
         console.log("AJAX: Signed up @ '/auth/signup'");
-        window.location.href = "/chat";
+        window.location.href = "/login";
       }
     }).catch((error) => {
       console.error("AJAX: Could not signup @ '/auth/signup'", error)
@@ -89,9 +89,9 @@ export default class SignUp extends React.Component {
 
 // currLatitude and currLongitude are "display:none". Current LAT and LONG values are in the input fields for the purpose of storing to User upon account creation. Whenever user logs in, the LAT and LONG are updated for his account.
   render() {
-    if (this.state.loading) {
-      return <LoadingPage/>;
-    } else {
+    // if (this.state.loading) {
+    //   return <LoadingPage/>;
+    // } else {
       return (
         <div className="signup">
           <form>
@@ -107,15 +107,17 @@ export default class SignUp extends React.Component {
             <button type="submit" className="btn btn-default submit" id="signupBtn" onClick={this.localSignup}>Sign me up!</button>
             <button type="submit" className="btn btn-default submit" id="logInBtn" onClick={this.backToLogIn}>Back To Login</button>
             <button type="submit" className="btn btn-default submit" id="homeBtn" onClick={this.backToHome}>Back To Home</button>
-            <div className="form-group">
-              <input type="number" className="form-control" id="currLatitude" placeholder="Current latitude" value={this.state.latitude} onChange={this.onChange}/>
-              <input type="number" className="form-control" id="currLongitude" placeholder="Current longitude" value={this.state.longitude} onChange={this.onChange}/>
-            </div>
+
           </form>
         </div>
       );
     }
   }
-}
+// }
 
 SignUp.propTypes = {};
+
+// <div className="form-group">
+//   <input type="number" className="form-control" id="currLatitude" placeholder="Current latitude" value={this.state.latitude} onChange={this.onChange}/>
+//   <input type="number" className="form-control" id="currLongitude" placeholder="Current longitude" value={this.state.longitude} onChange={this.onChange}/>
+// </div>

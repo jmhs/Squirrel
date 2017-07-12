@@ -13,9 +13,10 @@ export default class LogIn extends React.Component {
     this.state = {
       email: "",
       password: "",
-      latitude: "",
-      longitude: "",
+      latitude: 0,
+      longitude: 0,
       loading: true,
+      roomRoute: "",
       error: ""
     };
   }
@@ -41,6 +42,8 @@ export default class LogIn extends React.Component {
 
   componentDidMount() {
     var state = this.state;
+    // console.log(this.state.loading);
+
     if (this.state.latitude.toString().length + this.state.longitude.toString().length < 0) {
       this.state.loading = true;
     } else {
@@ -62,6 +65,37 @@ export default class LogIn extends React.Component {
 
   localLogin = (e) => {
     e.preventDefault();
+
+    var state = this.state
+
+    const chatRoom = () => {
+
+      if (this.state.latitude !== 0) {
+        if (this.state.latitude < 1.473298 && this.state.latitude > 1.352083) {
+          if (this.state.longitude < 104.021301 && this.state.longitude > 103.819836) {
+            // go to room B
+            state.roomRoute = "/B";
+          } else {
+            // go to room A
+            state.roomRoute = "/A";
+          }
+        } else if (this.state.latitude < 1.352083 && this.state.latitude > 1.230868) {
+          if (this.state.longitude < 103.819836 && this.state.longitude > 103.596681) {
+            // go to room C
+            state.roomRoute = "/C";
+          } else {
+            // go to room D
+            state.roomRoute = "/D";
+          }
+        } else {
+          // go to default /chat
+          state.roomRoute = "/";
+        }
+      }
+      this.setState(state);
+    }
+    chatRoom();
+
     axios.post('/auth/login', this.state).then((response) => {
       let data = response.data;
       if (data.error) {
@@ -69,24 +103,12 @@ export default class LogIn extends React.Component {
         this.setState({error: data.message});
       } else {
         console.error("AJAX: Logged in @ '/auth/user'");
-        window.location.href = "/chat";
+        window.location.href = "/chat" + this.state.roomRoute;
       }
     }).catch((error) => {
       console.error("AJAX: Could not login @ '/auth/login'")
       this.setState({error: "Login error, notify the dev team!"});
     });
-
-// TO FIGURE OUT HOW TO APPLY AXIOS PUT ON LOGIN FOR LAT AND LONG
-      // axios.put('/auth/login'+ this.state.user._id, {latitude: this.state.latitude, longitude: this.state.longitude})
-      //   .then( (response) => {
-      //     this.setState({
-      //       latitude: response.data,
-      //       longitude: response.data
-      //     })
-      //   })
-      //   .catch((error)=> {
-      //     console.log(error);
-      //   });
   }
 
   signUp = (e) => {
@@ -104,12 +126,14 @@ export default class LogIn extends React.Component {
   //   window.location.href = "/auth/facebook";
   // }
 
-// currLatitude and currLongitude are "display:none". Lat and Long values are in the input fields for the purpose of AXIOS PUT function. Whenever user logs in, the LAT and LONG are updated for his account.
+  // currLatitude and currLongitude are "display:none". Lat and Long values are in the input fields for the purpose of AXIOS PUT function. Whenever user logs in, the LAT and LONG are updated for his account.
   render() {
     if (this.state.loading) {
       return <LoadingPage/>;
     } else {
       return (
+
+
         <div className="login">
           <form>
             <div className="error">{this.state.error}</div>
@@ -130,6 +154,7 @@ export default class LogIn extends React.Component {
             </div>
           </form>
         </div>
+
       );
     }
   }
