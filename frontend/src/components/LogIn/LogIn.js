@@ -13,9 +13,10 @@ export default class LogIn extends React.Component {
     this.state = {
       email: "",
       password: "",
-      latitude: "",
-      longitude: "",
+      latitude: 0,
+      longitude: 0,
       loading: true,
+      roomRoute: "",
       error: ""
     };
   }
@@ -41,6 +42,7 @@ export default class LogIn extends React.Component {
 
   componentDidMount() {
     var state = this.state;
+    console.log(this.state.loading);
     if (this.state.latitude.toString().length + this.state.longitude.toString().length < 0) {
       this.state.loading = true;
     } else {
@@ -56,12 +58,43 @@ export default class LogIn extends React.Component {
 
     state[key] = value;
     console.log(state);
-    console.log(typeof(this.state.latitude));
+    // console.log(typeof(this.state.latitude));
     this.setState(state);
   }
 
   localLogin = (e) => {
     e.preventDefault();
+
+    var state = this.state
+
+    const chatRoom = () => {
+
+      if (this.state.latitude !== 0) {
+        if (this.state.latitude < 1.473298 && this.state.latitude > 1.352083) {
+          if (this.state.longitude < 104.021301 && this.state.longitude > 103.819836) {
+            // go to room B
+            state.roomRoute = "/B";
+          } else {
+            // go to room A
+            state.roomRoute = "/A";
+          }
+        } else if (this.state.latitude < 1.352083 && this.state.latitude > 1.230868) {
+          if (this.state.longitude < 103.819836 && this.state.longitude > 103.596681) {
+            // go to room C
+            state.roomRoute = "/C";
+          } else {
+            // go to room D
+            state.roomRoute = "/D";
+          }
+        } else {
+          // go to default /chat
+          state.roomRoute = "/";
+        }
+      }
+      this.setState(state);
+    }
+    chatRoom();
+
     axios.post('/auth/login', this.state).then((response) => {
       let data = response.data;
       if (data.error) {
@@ -69,24 +102,12 @@ export default class LogIn extends React.Component {
         this.setState({error: data.message});
       } else {
         console.error("AJAX: Logged in @ '/auth/user'");
-        window.location.href = "/chat";
+        window.location.href = "/chat" + this.state.roomRoute;
       }
     }).catch((error) => {
       console.error("AJAX: Could not login @ '/auth/login'")
       this.setState({error: "Login error, notify the dev team!"});
     });
-
-// TO FIGURE OUT HOW TO APPLY AXIOS PUT ON LOGIN FOR LAT AND LONG
-      // axios.put('/auth/login'+ this.state.user._id, {latitude: this.state.latitude, longitude: this.state.longitude})
-      //   .then( (response) => {
-      //     this.setState({
-      //       latitude: response.data,
-      //       longitude: response.data
-      //     })
-      //   })
-      //   .catch((error)=> {
-      //     console.log(error);
-      //   });
   }
 
   signUp = (e) => {
@@ -104,32 +125,34 @@ export default class LogIn extends React.Component {
   //   window.location.href = "/auth/facebook";
   // }
 
-// currLatitude and currLongitude are "display:none". Lat and Long values are in the input fields for the purpose of AXIOS PUT function. Whenever user logs in, the LAT and LONG are updated for his account.
+  // currLatitude and currLongitude are "display:none". Lat and Long values are in the input fields for the purpose of AXIOS PUT function. Whenever user logs in, the LAT and LONG are updated for his account.
   render() {
     if (this.state.loading) {
       return <LoadingPage/>;
     } else {
       return (
-        <div className="login">
-          <form>
-            <div className="error">{this.state.error}</div>
-            <div className="form-group">
-              <label htmlFor="email">Email address</label>
-              <input type="email" className="form-control" id="email" placeholder="Please enter email" value={this.state.email} onChange={this.onChange}/>
+
+        <div className="container">
+          <div className="col-md-4 col-md-offset-4">
+            <div className="panel panel-primary">
+              <div className="panel-heading" id="formHeader">LOGIN</div>
+              <form id="form" role="form">
+                <div className="error">{this.state.error}</div>
+                <label htmlFor="email">Email address</label>
+                <input type="email" className="form-control" id="email" placeholder="Please enter email" value={this.state.email} onChange={this.onChange}/>
+                <label htmlFor="password">Password</label>
+                <input type="password" className="form-control" id="password" placeholder="Please enter password" value={this.state.password} onChange={this.onChange}/>
+                <br />
+                <button type="submit" className="btn btn-primary submit" id="loginBtnl" onClick={this.localLogin}>Login</button>
+                <button type="submit" className="btn btn-default submit" id="signupBtnl" onClick={this.signUp}>Don't have an account yet? Sign up here!</button>
+                <button type="submit" className="btn btn-default submit" id="homeBtnl" onClick={this.backToHome}>Back to home</button>
+                <input type="number" className="form-control" id="currLatitude" placeholder="Current latitude" value={this.state.latitude} onChange={this.onChange}/>
+                <input type="number" className="form-control" id="currLongitude" placeholder="Current longitude" value={this.state.longitude} onChange={this.onChange}/>
+              </form>
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="password" className="form-control" id="password" placeholder="Please enter password" value={this.state.password} onChange={this.onChange}/>
-            </div>
-            <button type="submit" className="btn btn-primary submit" id="loginBtn" onClick={this.localLogin}>Login</button>
-            <button type="submit" className="btn btn-default submit" id="signupBtn" onClick={this.signUp}>Don't have an account yet? Sign up here!</button>
-            <button type="submit" className="btn btn-default submit" id="homeBtn" onClick={this.backToHome}>Back To Home</button>
-            <div className="form-group">
-              <input type="number" className="form-control" id="currLatitude" placeholder="Current latitude" value={this.state.latitude} onChange={this.onChange}/>
-              <input type="number" className="form-control" id="currLongitude" placeholder="Current longitude" value={this.state.longitude} onChange={this.onChange}/>
-            </div>
-          </form>
+          </div>
         </div>
+
       );
     }
   }

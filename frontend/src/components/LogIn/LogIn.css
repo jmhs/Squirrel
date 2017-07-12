@@ -1,36 +1,51 @@
-#Login {
-  margin-top: 100px;
-  border: solid 1px #CCCCCC;
-  border-radius: 20px;
-  padding: 30px;
+.container {
+  margin-top: 5%;
+  height: 100vh;
+  width: 100vw;
+  padding: 10px 0 0 0;
+  margin: 0;
+  border-color: #43BEB6;
 }
 
-.or {
+#form {
+  margin: 0 10px 10px 10px;
+}
+
+#or {
   text-align: center;
-  margin: 15px;
   font-style: italic;
-  font-weight: 600;
-  font-size: 15px;
 }
 
-#Login button {
-  margin-bottom: 15px;
-  width: 100%;
+#formHeader {
+  background: #43BEB6;
+  border-color: #43BEB6;
 }
 
-#Login .error {
-  text-align: center;
-  font-weight: bold;
-  color: red;
+#loginBtnl {
+  margin-top: 10px;
+  background: #43BEB6;
+  border-color: #43BEB6;
+  color: white;
 }
 
-.login {
-  text-align: center;
-  margin: 20px;
+#signupBtnl {
+  background: white;
+  border-color: #43BEB6;
+  color: black;
+  margin-top: 10px;
 }
 
-#loginBtn {
-  margin-bottom: 10px;
+#homeBtnl {
+  background: white;
+  border-color: #43BEB6;
+  color: black;
+  margin-top: 10px;
+}
+
+
+.panel-primary {
+  border-color: #43BEB6;
+  box-shadow: 2px 2px 2px lightgray;
 }
 
 #currLatitude {

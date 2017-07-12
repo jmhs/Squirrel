@@ -30,6 +30,12 @@ router.post('/login', function(req, res, next) {
               console.log("Login err", "Wrong password");
               return res.json({'error':'user','message': "Wrong password"})
             }
+            user.latitude = req.body.latitude;
+            user.longitude = req.body.longitude;
+            user.save((err) => {
+              console.log("User save error");
+              return res.json({'error':'database','message': err});
+            });
             return res.json(user);
         });
     })(req, res, next);
