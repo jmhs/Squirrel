@@ -19,32 +19,32 @@ export default class LandingPage extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
+      <div className="container-fluid" id="main">
+        <div className="row" id="home">
           <Header/>
         </div>
-        <div className="row">
+        <div className="row" >
           <Section2/>
         </div>
-        <div className="row">
+        <div className="row" id="features">
           <Section3/>
         </div>
-        <div className="row">
+        <div className="row" >
           <Section4/>
         </div>
-        <div className="row">
+        <div className="row" id="design">
           <Section5/>
         </div>
-        <div className="row">
+        <div className="row" id="team">
           <Section6/>
         </div>
-        <div className="row">
+        <div className="row" id="satisfaction">
           <Section7/>
         </div>
-        <div className="row">
+        <div className="row" id="freeTry">
           <Section8/>
         </div>
-        <div className="row">
+        <div className="row" id="contact">
           <Section9/>
         </div>
       </div>
