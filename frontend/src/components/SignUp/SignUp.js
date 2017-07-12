@@ -77,7 +77,7 @@ export default class SignUp extends React.Component {
     });
   }
 
-  backToLogIn = (e) => {
+  backToLogin = (e) => {
     e.preventDefault();
     window.location.href = "/login";
   }
@@ -87,33 +87,34 @@ export default class SignUp extends React.Component {
     window.location.href = "/";
   }
 
-// currLatitude and currLongitude are "display:none". Current LAT and LONG values are in the input fields for the purpose of storing to User upon account creation. Whenever user logs in, the LAT and LONG are updated for his account.
+  // currLatitude and currLongitude are "display:none". Current LAT and LONG values are in the input fields for the purpose of storing to User upon account creation. Whenever user logs in, the LAT and LONG are updated for his account.
   render() {
-    // if (this.state.loading) {
-    //   return <LoadingPage/>;
-    // } else {
-      return (
-        <div className="signup">
-          <form>
-            <div className="error">{this.state.error}</div>
-            <div className="form-group">
+    return (
+
+      <div className="container">
+        <div className="col-md-4 col-md-offset-4">
+          <div className="panel panel-primary">
+            <div className="panel-heading" id="formHeader">SIGNUP</div>
+            <form id="form" role="form">
+              <div className="error">{this.state.error}</div>
               <label htmlFor="email">Email address</label>
               <input type="email" className="form-control" id="email" placeholder="Please enter email" value={this.state.email} onChange={this.onChange}/>
-            </div>
-            <div className="form-group">
               <label htmlFor="password">Password</label>
               <input type="password" className="form-control" id="password" placeholder="Please enter password" value={this.state.password} onChange={this.onChange}/>
-            </div>
-            <button type="submit" className="btn btn-default submit" id="signupBtn" onClick={this.localSignup}>Sign me up!</button>
-            <button type="submit" className="btn btn-default submit" id="logInBtn" onClick={this.backToLogIn}>Back To Login</button>
-            <button type="submit" className="btn btn-default submit" id="homeBtn" onClick={this.backToHome}>Back To Home</button>
-
-          </form>
+              <br/>
+              <button type="submit" className="btn btn-default submit" id="signupBtn" onClick={this.signUp}>Sign me up!</button>
+              <button type="submit" className="btn btn-primary submit" id="loginBtn" onClick={this.backToLogin}>Back to Login</button>
+              <button type="submit" className="btn btn-default submit" id="homeBtn" onClick={this.backToHome}>Back To Home</button>
+              <input type="number" className="form-control" id="currLatitude" placeholder="Current latitude" value={this.state.latitude} onChange={this.onChange}/>
+              <input type="number" className="form-control" id="currLongitude" placeholder="Current longitude" value={this.state.longitude} onChange={this.onChange}/>
+            </form>
+          </div>
         </div>
-      );
-    }
+      </div>
+
+    );
   }
-// }
+}
 
 SignUp.propTypes = {};
 
@@ -121,3 +122,23 @@ SignUp.propTypes = {};
 //   <input type="number" className="form-control" id="currLatitude" placeholder="Current latitude" value={this.state.latitude} onChange={this.onChange}/>
 //   <input type="number" className="form-control" id="currLongitude" placeholder="Current longitude" value={this.state.longitude} onChange={this.onChange}/>
 // </div>
+
+// <div className="signup">
+//   <form>
+//     <div className="error">{this.state.error}</div>
+//     <div className="form-group">
+//       <label htmlFor="email">Email address</label>
+//       <input type="email" className="form-control" id="email" placeholder="Please enter email" value={this.state.email} onChange={this.onChange}/>
+//     </div>
+//     <div className="form-group">
+//       <label htmlFor="password">Password</label>
+//       <input type="password" className="form-control" id="password" placeholder="Please enter password" value={this.state.password} onChange={this.onChange}/>
+//     </div>
+//     <button type="submit" className="btn btn-default submit" id="signupBtn" onClick={this.localSignup}>Sign me up!</button>
+//     <button type="submit" className="btn btn-default submit" id="logInBtn" onClick={this.backToLogIn}>Back To Login</button>
+//     <button type="submit" className="btn btn-default submit" id="homeBtn" onClick={this.backToHome}>Back To Home</button>
+//
+//   </form>
+// </div>
+
+// <button type="submit" className="btn btn-primary submit" id="loginBtn" onClick={this.localLogin}>Login</button>

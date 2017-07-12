@@ -1,6 +1,5 @@
 .container {
   margin-top: 5%;
-  /*background-color: red;*/
   height: 100vh;
   width: 100vw;
   padding: 10px 0 0 0;
@@ -8,21 +7,41 @@
   border-color: #43BEB6;
 }
 
+#form {
+  margin: 0 10px 10px 10px;
+}
+
 #or {
   text-align: center;
   font-style: italic;
 }
 
-#loginBtn, #userBox, #passwordBox, #formHeader {
+#formHeader {
   background: #43BEB6;
   border-color: #43BEB6;
 }
 
-#signUpBtn {
+#loginBtnl {
+  margin-top: 10px;
+  background: #43BEB6;
+  border-color: #43BEB6;
+  color: white;
+}
+
+#signupBtnl {
   background: white;
   border-color: #43BEB6;
   color: black;
+  margin-top: 10px;
 }
+
+#homeBtnl {
+  background: white;
+  border-color: #43BEB6;
+  color: black;
+  margin-top: 10px;
+}
+
 
 .panel-primary {
   border-color: #43BEB6;
