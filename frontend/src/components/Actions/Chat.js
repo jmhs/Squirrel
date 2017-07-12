@@ -1,6 +1,6 @@
 export const postMessages = (text) => {
   return {
-    type: 'POST_MESSAGES',
+    type: 'POST_MESSAGES', //instructions
     text
   }
 }
