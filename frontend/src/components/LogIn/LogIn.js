@@ -22,6 +22,7 @@ export default class LogIn extends React.Component {
       longitude: 0,
       loading: true,
       roomRoute: "",
+      //isLoggedIn: false,
       error: ""
     };
   }
@@ -37,8 +38,8 @@ export default class LogIn extends React.Component {
       }
     }
     const showPosition = (position) => {
-      state.latitude = position.coords.latitude;
-      state.longitude = position.coords.longitude;
+      state.latitude = position.coords.latitude.toFixed(6);
+      state.longitude = position.coords.longitude.toFixed(6);
       this.setState(state)
     }
     getLocation();
@@ -104,15 +105,20 @@ export default class LogIn extends React.Component {
       }
       this.setState(state);
     }
+
+    // Call loginVerification and chatRoom functions
+    //loginVerification();
     chatRoom();
 
     axios.post('/auth/login', this.state).then((response) => {
       let data = response.data;
       if (data.error) {
         console.log(data.message)
-        this.setState({error: data.message});
+        this.setState({error: data.message, isLoggedIn: false});
       } else {
         console.error("AJAX: Logged in @ '/auth/user'");
+      //  this.setState({isLoggedIn: true});
+      //  console.log(this.state.isLoggedIn);
         window.location.href = "/chat" + this.state.roomRoute;
       }
     }).catch((error) => {
