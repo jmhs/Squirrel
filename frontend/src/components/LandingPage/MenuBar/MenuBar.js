@@ -14,11 +14,11 @@ export default class MenuBar extends React.Component {
       <div>
         <Menu>
           <a href="/signup">
-            <i className="fa fa-fw fa-user-plus"></i>
+            <i className="fa fa-fw fa-lg fa-user-plus"></i>
             <span className="menuLink">Free Sign Up!</span>
           </a>
           <a href="/login">
-            <i className="fa fa-fw fa-sign-in"></i>
+            <i className="fa fa-fw fa-lg fa-sign-in"></i>
             <span className="menuLink">Login</span>
           </a>
           <hr/>
@@ -53,12 +53,11 @@ export default class MenuBar extends React.Component {
           <hr/>
           <p>connect with us!</p>
           <div>
-            <a className="fa fa-lg fa-facebook icon" href="#"></a>
-            <a className="fa fa-lg fa-google-plus icon" href="#"></a>
-            <a className="fa fa-lg fa-twitter icon" href="#"></a>
-            <a className="fa fa-lg fa-instagram icon" href="#"></a>
-            <a className="fa fa-lg fa-apple icon" href="#"></a>
-            <a className="fa fa-lg fa-android icon" href="#"></a>
+            <a className="fa fa-2x fa-facebook icon" href="#"></a>
+            <a className="fa fa-2x fa-google-plus icon" href="#"></a>
+            <a className="fa fa-2x fa-twitter icon" href="#"></a>
+            <a className="fa fa-2x fa-apple icon" href="#"></a>
+            <a className="fa fa-2x fa-android icon" href="#"></a>
           </div>
         </Menu>
       </div>
