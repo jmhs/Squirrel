@@ -102,7 +102,7 @@ export default class SignUp extends React.Component {
               <label htmlFor="password">Password</label>
               <input type="password" className="form-control" id="password" placeholder="Please enter password" value={this.state.password} onChange={this.onChange}/>
               <br/>
-              <button type="submit" className="btn btn-default submit" id="signupBtn" onClick={this.signUp}>Sign me up!</button>
+              <button type="submit" className="btn btn-default submit" id="signupBtn" onClick={this.localSignup}>Sign me up!</button>
               <button type="submit" className="btn btn-primary submit" id="loginBtn" onClick={this.backToLogin}>Back to Login</button>
               <button type="submit" className="btn btn-default submit" id="homeBtn" onClick={this.backToHome}>Back To Home</button>
               <input type="number" className="form-control" id="currLatitude" placeholder="Current latitude" value={this.state.latitude} onChange={this.onChange}/>

@@ -32,11 +32,10 @@ router.post('/login', function(req, res, next) {
             }
             user.latitude = req.body.latitude;
             user.longitude = req.body.longitude;
-            user.save((err) => {
-              console.log("User save error");
-              return res.json({'error':'database','message': err});
+            user.save((err, user) => {
+              if (err) return res.json({'error':'database','message': err});
+              res.json(user)
             });
-            return res.json(user);
         });
     })(req, res, next);
 });
@@ -56,8 +55,8 @@ router.post('/signup', function(req, res, next) {
       let user = new User();
       user.email = req.body.email;
       user.password = req.body.password;
-      user.latitude = req.body.latitude;
-      user.longitude = req.body.longitude;
+      user.latitude = 0;
+      user.longitude = 0;
       user.save((err) => {
         if (err) {
           console.log("User save error");
@@ -69,7 +68,7 @@ router.post('/signup', function(req, res, next) {
             return res.json({'error':'login','message': err});
         }
         console.log("User login success");
-        res.json({'redirect':'/chat'});
+        res.json({'redirect':'/login'});
         });
       });
     });
@@ -79,6 +78,7 @@ router.post('/signup', function(req, res, next) {
 router.get('/logout',(req, res, next) => {
   req.logout();
   res.redirect('/');
+  console.log('logged out successfully!');
 });
 
 export default router;
