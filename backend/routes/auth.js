@@ -1,19 +1,15 @@
 import express from 'express';
 import passport from 'passport';
 import User from '../models/User';
-
 const router = express.Router();
-
 /* GET index page. */
 router.get('/user', (req, res, next) => {
   res.json(req.user);
 });
-
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/LogIn' }), (req, res) => {
   res.redirect(req.session.returnTo || '/chat');
 });
-
 // LOGIN
 router.post('/login', function(req, res, next) {
     passport.authenticate('local', function(error, user, info) {
@@ -24,7 +20,6 @@ router.post('/login', function(req, res, next) {
         if(!user) {
           return res.json({'error':'user','message': "Wrong password or email"})
         }
-
         req.logIn(user, function(err) {
             if (err) {
               console.log("Login err", "Wrong password");
@@ -36,22 +31,17 @@ router.post('/login', function(req, res, next) {
               if (err) return res.json({'error':'database','message': err});
               res.json(user)
             });
-
+        });
     })(req, res, next);
 });
-
 // SIGNUP
 router.post('/signup', function(req, res, next) {
     User.findOne({ email: req.body.email }, (err, existingUser) => {
-
       console.log("Data: ",req.body.email, req.body.password)
-
       if (existingUser) {
           return res.json({'error':'login','message': 'This email already exists!'});
       }
-
       console.log("New user");
-
       let user = new User();
       user.email = req.body.email;
       user.password = req.body.password;
@@ -73,12 +63,10 @@ router.post('/signup', function(req, res, next) {
       });
     });
 });
-
 // LOGOUT
 router.get('/logout',(req, res, next) => {
   req.logout();
   res.redirect('/');
   console.log('logged out successfully!');
 });
-
 export default router;
