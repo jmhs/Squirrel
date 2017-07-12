@@ -12,8 +12,8 @@ import { initStore } from './components/Store/Store'
 
 const store = initStore();
 store.subscribe( () => {
-    const chatss = store.getState();
-    console.log(chatss);
+    const chats = store.getState();
+    console.log(chats);
 })
 
 ReactDOM.render(

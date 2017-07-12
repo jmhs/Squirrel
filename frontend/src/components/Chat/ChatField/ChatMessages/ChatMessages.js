@@ -21,7 +21,7 @@ class ChatMessages extends React.Component {
     console.log(this.props.chat)
     let renderMessages = (messages) => {
         if (messages) {
-          console.log('no. of ', messages)
+          // console.log('no. of ', messages)
         {return messages.map((message, index) => {
           return(
           <p>
