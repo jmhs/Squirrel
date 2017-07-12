@@ -1,7 +1,11 @@
+import {postMessages, sendMessages } from '../../Actions/Chat';
 import React, {PropTypes} from 'react';
+import { connect } from 'react-redux';
 const io = require('socket.io-client/dist/socket.io.js');
 
-export default class ChatInput extends React.Component {
+
+
+class ChatInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,16 +24,20 @@ export default class ChatInput extends React.Component {
       if(e.target.id == "message") {
         state.message= e.target.value;
       }
-      console.log(state)
       this.setState(state)
+
   }
 
   onClick = (e) => {
-    const socket = io.connect('http://localhost:3001');
-    socket.emit('new-message', {
+
+  const message = {
       message: this.state.message,
       handle: this.state.handle
-    });
+    }
+  console.log(message)
+  //sendMessages(message)
+  this.props.fireoff(message)
+    //});
   }
 
 
@@ -57,3 +65,20 @@ export default class ChatInput extends React.Component {
 
 ChatInput.propTypes = {
 };
+
+
+const mapStateToProps = (ChatReducer) => {
+    return {
+    message : ChatReducer.message,
+    handle : ChatReducer.handle
+    }
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fireoff : (message) => dispatch(sendMessages(message))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatInput);
