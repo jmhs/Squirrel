@@ -14,6 +14,7 @@ import LandingPage from '../LandingPage/LandingPage'
 import LogIn from '../LogIn/LogIn'
 import SignUp from '../SignUp/SignUp'
 import LoadingPage from '../LoadingPage/LoadingPage'
+import NotFound from '../NotFound/NotFound'
 
 import './App.css';
 
@@ -55,6 +56,7 @@ class App extends Component {
           <Route path="/chat/D" component={Chat} />
           <Route path="/signup" component={SignUp}/>
           <Route path="/loadingpage" component={LoadingPage}/>
+          <Route component={NotFound}/>
         </Switch>
       </Router>
     );
