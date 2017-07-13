@@ -13,8 +13,17 @@ class ChatMessages extends React.Component {
   }
 }
 
+  scrollToBottom = () => {
+    this.messageEnd.scrollIntoView();
+  }
+
   componentDidMount() {
+    this.scrollToBottom();
     this.props.getMessages()
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
   render(){
@@ -42,6 +51,9 @@ class ChatMessages extends React.Component {
     return (
       <div>
       {messages}
+
+      <div id="messageEnd"
+            ref={(el) => this.messageEnd = el} />
       </div>
     );
   }
