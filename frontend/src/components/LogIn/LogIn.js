@@ -3,7 +3,12 @@ import ReactLoading from 'react-loading';
 import LoadingPage from '../LoadingPage/LoadingPage';
 
 import { connect } from 'react-redux';
+
+import { sendLong, sendLat } from '../Actions/Chat';
+import { getUser, updateUser } from '../Actions/User'
+import { getRoom } from '../Actions/Room'
 import {chatRoom} from '../Actions/Chat';
+
 
 import axios from 'axios';
 
@@ -22,7 +27,6 @@ class LogIn extends React.Component {
       longitude: 0,
       loading: true,
       roomRoute: "",
-      //isLoggedIn: false,
       error: "",
       chatRoom: ""
     };
@@ -44,16 +48,17 @@ class LogIn extends React.Component {
       this.setState(state)
     }
     getLocation();
-    console.log(this.state.latitude.toString().length);
   }
 
   componentDidMount() {
     var state = this.state;
+
     console.log(this.state.loading);
     if (this.state.latitude.toString().length + this.state.longitude.toString().length < 0) {
+      console.log('true ')
       this.state.loading = true;
     } else {
-      this.state.loading = false;
+      setTimeout(()=>{this.state.loading = false;}, 1000)
     };
     console.log(this.state.loading);
   }
@@ -65,7 +70,7 @@ class LogIn extends React.Component {
 
     state[key] = value;
     console.log(state);
-    // console.log(typeof(this.state.latitude));
+    console.log(typeof(this.state.latitude));
     this.setState(state);
   }
 
@@ -108,6 +113,7 @@ class LogIn extends React.Component {
         }
       }
       this.setState(state);
+      this.props.getRoom(this.state.roomRoute)
     }
 
     // Call loginVerification and chatRoom functions
@@ -121,9 +127,10 @@ class LogIn extends React.Component {
         this.setState({error: data.message, isLoggedIn: false});
       } else {
         console.error("AJAX: Logged in @ '/auth/user'");
-      //  this.setState({isLoggedIn: true});
-      //  console.log(this.state.isLoggedIn);
-        window.location.href = "/chat" + this.state.roomRoute;
+       this.setState({isLoggedIn: true});
+       // this.props.updateUser(data)
+        // window.location.href = "/chat" + this.state.roomRoute;
+        this.props.history.push('/chat'+this.props.room)
       }
     }).catch((error) => {
       console.error("AJAX: Could not login @ '/auth/login'")
@@ -133,12 +140,12 @@ class LogIn extends React.Component {
 
   signUp = (e) => {
     e.preventDefault();
-    window.location.href = "/signup";
+    this.props.history.push("/signup");
   }
 
   backToHome = (e) => {
     e.preventDefault();
-    window.location.href = "/";
+    this.props.history.push('/')
   }
 
   // facebookLogin = (e) => {
@@ -179,7 +186,22 @@ class LogIn extends React.Component {
   }
 }
 
-LogIn.propTypes = {};
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    room: state.room
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser: () => {dispatch(getUser())},
+    updateUser: (user) => {dispatch(updateUser(user))},
+    getRoom: (room) => {dispatch(getRoom(room))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
 
 // const mapStateToProps = (userReducer) => {
 //   return

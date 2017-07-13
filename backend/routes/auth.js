@@ -4,6 +4,7 @@ import User from '../models/User';
 const router = express.Router();
 /* GET index page. */
 router.get('/user', (req, res, next) => {
+  console.log(req.user)
   res.json(req.user);
 });
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
@@ -29,8 +30,10 @@ router.post('/login', function(req, res, next) {
             user.longitude = req.body.longitude;
             user.save((err, user) => {
               if (err) return res.json({'error':'database','message': err});
-              res.json(user)
+              //console.log(user)
+              return res.json(user)
             });
+            //return res.json(user)
         });
     })(req, res, next);
 });

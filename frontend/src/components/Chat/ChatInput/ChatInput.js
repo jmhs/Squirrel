@@ -13,7 +13,27 @@ class ChatInput extends React.Component {
       message:''
     }
   }
+  componentDidMount(){
+      const socket = io.connect('http://localhost:3001');
+      // Query DOM
+      const message = document.getElementById('message'),
+            handle = document.getElementById('handle'),
+            btn = document.getElementById('send'),
 
+
+            output = document.getElementById('output'),
+            feedback = document.getElementById('feedback');
+
+      message.addEventListener('keypress', () => {
+        socket.emit("typing", this.state.handle);
+      });
+
+      socket.on('typing', (data) => {
+        feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+      });
+
+
+  }
   onChange = (e) => {
       let state = this.state;
 
