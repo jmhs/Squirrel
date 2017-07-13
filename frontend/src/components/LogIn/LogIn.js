@@ -189,7 +189,8 @@ class LogIn extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    room: state.room
+    room: state.room,
+    chatRoom : state.chatRoom
   }
 }
 
@@ -197,29 +198,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUser: () => {dispatch(getUser())},
     updateUser: (user) => {dispatch(updateUser(user))},
-    getRoom: (room) => {dispatch(getRoom(room))}
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
-
-// const mapStateToProps = (userReducer) => {
-//   return
-// }
-// <div className="or">or</div>
-// <button type="submit" className="btn btn-primary facebook" onClick={this.facebookLogin}>Login with Facebook</button>
-
-const mapStateToProps = (ChatReducer) => {
-    return {
-    chatRoom : ChatReducer.chatRoom
-    }
-
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
+    getRoom: (room) => {dispatch(getRoom(room))},
     chatRoom : chatRoom => dispatch()
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
+
+// <div className="or">or</div>
+// <button type="submit" className="btn btn-primary facebook" onClick={this.facebookLogin}>Login with Facebook</button>
