@@ -6,10 +6,10 @@
 
 //import { getTodos } from '../API/TodoAPI';
 //const initialTodos = getTodos();
-const initialState =  [{
-  message : "",
-  handle: ""
-}]
+const initialState =  [
+  // message: "",
+  // handle: ""
+]
 
 const ChatReducer = (state = initialState, action) =>{
 
@@ -23,6 +23,15 @@ const ChatReducer = (state = initialState, action) =>{
         message: action.text.message.message,
         handle: action.text.message.handle
       }
+    ]
+    break;
+
+    case 'CHAT_ROOM':
+    return [
+      ...state,
+      {
+        chatRoom: action.text.chatRoom
+      },
     ]
     break;
 // ToBeForSelf/NotSelfMessages

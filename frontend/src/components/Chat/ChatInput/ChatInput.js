@@ -29,7 +29,7 @@ class ChatInput extends React.Component {
   }
 
   onClick = (e) => {
-
+  let state = this.state;
   const message = {
       message: this.state.message,
       handle: this.state.handle
@@ -38,8 +38,26 @@ class ChatInput extends React.Component {
   //sendMessages(message)
   this.props.fireoff(message)
     //});
+    this.state.message = "";
+    this.setState(state)
   }
 
+  enterKeyPress = (e) => {
+    console.log("pressed Enter");
+    if(e.charCode==13){
+      let state = this.state;
+      const message = {
+          message: this.state.message,
+          handle: this.state.handle
+        }
+      console.log(message)
+      //sendMessages(message)
+      this.props.fireoff(message)
+        //});
+        this.state.message = "";
+        this.setState(state)
+    }
+  }
 
   render() {
 
@@ -55,7 +73,8 @@ class ChatInput extends React.Component {
               type="text"
               placeholder="Message"
               value={this.state.message}
-              onChange={this.onChange}/>
+              onChange={this.onChange}
+              onKeyPress={this.enterKeyPress}/>
 
       <button id="send" onClick={this.onClick}>Send</button>
       </div>
