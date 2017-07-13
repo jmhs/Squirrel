@@ -5,8 +5,8 @@ import LoadingPage from '../LoadingPage/LoadingPage';
 import { connect } from 'react-redux';
 
 import { sendLong, sendLat } from '../Actions/Chat';
-import { getUser, updateUser } from '../Actions/User'
-import { getRoom } from '../Actions/Room'
+import { getUser, updateUser } from '../Actions/User';
+import { getRoom } from '../Actions/Room';
 import {chatRoom} from '../Actions/Chat';
 
 
@@ -33,33 +33,45 @@ class LogIn extends React.Component {
   }
 
   componentWillMount() {
-    var state = this.state;
+    let state = this.state;
     const getLocation = () => {
 
       if (navigator.geolocation) {
+        console.log('geo available')
         navigator.geolocation.getCurrentPosition(showPosition);
       } else {
         console.log("Geolocation is not supported by this browser.");
       }
     }
     const showPosition = (position) => {
+      console.log('show pos start')
       state.latitude = position.coords.latitude.toFixed(6);
       state.longitude = position.coords.longitude.toFixed(6);
+      console.log('showpos', state)
+      state.loading = false;
       this.setState(state)
+      console.log('after get location', this.state)
     }
     getLocation();
+
   }
 
   componentDidMount() {
-    var state = this.state;
-
-    console.log(this.state.loading);
-    if (this.state.latitude.toString().length + this.state.longitude.toString().length < 0) {
-      console.log('true ')
-      this.state.loading = true;
-    } else {
-      setTimeout(()=>{this.state.loading = false;}, 1000)
-    };
+    console.log('login component did mount')
+  //   let state = this.state;
+  //   console.log(state)
+  //   setTimeout(()=> {
+  //   if (!state.longitude) {
+  //     console.log('true ')
+  //     state.loading = true;
+  //   } else {
+  //     // setTimeout(()=> {
+  //       console.log('lat n long exist')
+  //       state.loading = false;
+  //       this.setState(state)
+  //     // }, 1000)
+  //   };
+  // }, 2000)
     console.log(this.state.loading);
   }
 
@@ -124,11 +136,12 @@ class LogIn extends React.Component {
       let data = response.data;
       if (data.error) {
         console.log(data.message)
-        this.setState({error: data.message, isLoggedIn: false});
+        //this.setState({error: data.message, isLoggedIn: false});
       } else {
         console.error("AJAX: Logged in @ '/auth/user'");
-       this.setState({isLoggedIn: true});
-       // this.props.updateUser(data)
+      //  this.setState({isLoggedIn: true});
+        this.props.updateUser(data)
+       // this.props.getUser()
         // window.location.href = "/chat" + this.state.roomRoute;
         this.props.history.push('/chat'+this.props.room)
       }
