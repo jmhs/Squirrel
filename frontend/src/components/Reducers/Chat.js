@@ -13,7 +13,7 @@ const initialState =  [
 
 const ChatReducer = (state = initialState, action) =>{
 
-  console.log(action);
+  //console.log(action);
 
   switch (action.type) {
     case 'POST_MESSAGES':
