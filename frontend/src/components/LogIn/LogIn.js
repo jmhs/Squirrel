@@ -3,7 +3,7 @@ import ReactLoading from 'react-loading';
 import LoadingPage from '../LoadingPage/LoadingPage';
 
 import { connect } from 'react-redux';
-import {sendLong, sendLat} from '../Actions/Chat';
+import {chatRoom} from '../Actions/Chat';
 
 import axios from 'axios';
 
@@ -11,7 +11,7 @@ import './LogIn.css';
 
 const io = require('socket.io-client/dist/socket.io.js');
 
-export default class LogIn extends React.Component {
+class LogIn extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,7 +23,8 @@ export default class LogIn extends React.Component {
       loading: true,
       roomRoute: "",
       //isLoggedIn: false,
-      error: ""
+      error: "",
+      chatRoom: ""
     };
   }
 
@@ -72,11 +73,10 @@ export default class LogIn extends React.Component {
     e.preventDefault();
 
     var state = this.state
-
     //connect to the back to send the longitude and latitude
-    const socket = io.connect('http://localhost:3001');
-    socket.emit("userLongitude", this.state.longitude);
-    socket.emit("userLatitude", this.state.latitude);
+    // const socket = io.connect('http://localhost:3001');
+    // socket.emit("userLongitude", this.state.longitude);
+    // socket.emit("userLatitude", this.state.latitude);
 
 
     const chatRoom = () => {
@@ -86,17 +86,21 @@ export default class LogIn extends React.Component {
           if (this.state.longitude < 104.021301 && this.state.longitude > 103.819836) {
             // go to room B
             state.roomRoute = "/B";
+            state.chatRoom = "roomB";
           } else {
             // go to room A
             state.roomRoute = "/A";
+            state.chatRoom = "roomA";
           }
         } else if (this.state.latitude < 1.352083 && this.state.latitude > 1.230868) {
           if (this.state.longitude < 103.819836 && this.state.longitude > 103.596681) {
             // go to room C
             state.roomRoute = "/C";
+            state.chatRoom = "roomC";
           } else {
             // go to room D
             state.roomRoute = "/D";
+            state.chatRoom = "roomD";
           }
         } else {
           // go to default /chat
@@ -182,3 +186,18 @@ LogIn.propTypes = {};
 // }
 // <div className="or">or</div>
 // <button type="submit" className="btn btn-primary facebook" onClick={this.facebookLogin}>Login with Facebook</button>
+
+const mapStateToProps = (ChatReducer) => {
+    return {
+    chatRoom : ChatReducer.chatRoom
+    }
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    chatRoom : chatRoom => dispatch()
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

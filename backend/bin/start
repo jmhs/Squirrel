@@ -73,29 +73,90 @@ const io = socket(server);
 
 io.on('connection', (socket) =>{
   console.log('made socket connection', socket.id);
-
+  var userLong  = 0;
+  var userLat = 0;
   // sort user to the rooms by geo locations
   //app.get()
   socket.on('userLongitude', (longitude)=> {
     console.log(longitude);
+    userLong = longitude;
+    console.log(userLong);
+
+    socket.on("userLatitude", (latitude) => {
+      console.log(latitude);
+      userLat = latitude;
+      console.log(userLat);
+
+
+  if (userLat !== 0) {
+    if (userLat < 1.473298 && userLat > 1.352083) {
+      if (userLong < 104.021301 && userLong > 103.819836) {
+        // go to room B
+        socket.join('roomB');
+        console.log("you are in room B");
+      } else {
+        // go to room A
+        socket.join('roomA');
+        console.log("you are in room A");
+      }
+    } else if (userLat < 1.352083 && userLat > 1.230868) {
+      if (userLong < 103.819836 && userLong > 103.596681) {
+        // go to room C
+        socket.join('roomC');
+        console.log("you are in room C");
+      } else {
+        // go to room D
+        socket.join('roomD');
+        console.log("you are in room D");
+      }
+    } else {
+      // go to default /chat
+      console.log('No room for you! GHOST!!!');
+    }
+  }
+
+
   });
 
-  // handle chat messages
+  });
+
+  // handle chat messages for room A
   socket.on('new-message', (msg) => {
     console.log(msg)
-    io.sockets.in(socket.room).emit("receive-message", msg);
+    io.to('roomA').emit("receive-message", msg);
   });
-  // handle typing message notification
+  // handle chat messages for room B
+  socket.on('new-message', (msg) => {
+    console.log(msg)
+    io.to('roomB').emit("receive-message", msg);
+  });
+  // handle chat messages for room C
+  socket.on('new-message', (msg) => {
+    console.log(msg)
+    io.to('roomC').emit("receive-message", msg);
+  });
+  // handle chat messages for room D
+  socket.on('new-message', (msg) => {
+    console.log(msg)
+    io.to('roomD').emit("receive-message", msg);
+  });
+
+  // handle typing message notification for room A
   socket.on('typing', (data) => {
-    socket.broadcast.in(socket.room).emit('typing', data);
+    socket.broadcast.to('roomA').emit('typing', data);
   });
-
-  // // to handle chat in chat roomA
-  // socket.on('new-message', (msg) => {
-  //   console.log(msg)
-  //   io.sockets.in('roomA').emit("receive-message", msg);
-  // });
-
+  // handle typing message notification for room B
+  socket.on('typing', (data) => {
+    socket.broadcast.to('roomB').emit('typing', data);
+  });
+  // handle typing message notification for room C
+  socket.on('typing', (data) => {
+    socket.broadcast.to('roomC').emit('typing', data);
+  });
+  // handle typing message notification for room D
+  socket.on('typing', (data) => {
+    socket.broadcast.to('roomD').emit('typing', data);
+  });
 
 
 });

@@ -10,27 +10,32 @@ const io = require('socket.io-client/dist/socket.io.js');
 
 class Chat extends Component {
 
+  // componentDidMount() {
+  //   const socket = io.connect('http://localhost:3001');
+  //   // Query DOM
+  //   const message = document.getElementById('message'),
+  //         handle = document.getElementById('handle'),
+  //         btn = document.getElementById('send'),
+  //
+  //
+  //         output = document.getElementById('output'),
+  //         feedback = document.getElementById('feedback');
+  //
+  //
+  //   message.addEventListener('keypress', () => {
+  //     socket.emit("typing", handle.value);
+  //   });
+  //
+  //   socket.on('typing', (data) => {
+  //     feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+  //   });
+  //
+  // }
   componentDidMount() {
-    const socket = io.connect('http://localhost:3001');
-    // Query DOM
-    const message = document.getElementById('message'),
-          handle = document.getElementById('handle'),
-          btn = document.getElementById('send'),
-
-
-          output = document.getElementById('output'),
-          feedback = document.getElementById('feedback');
-
-
-    message.addEventListener('keypress', () => {
-      socket.emit("typing", handle.value);
-    });
-
-    socket.on('typing', (data) => {
-      feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
-    });
-
-  }
+    // const socket = io.connect('http://localhost:3001');
+    // socket.emit("userLongitude", 103.9);
+    // socket.emit("userLatitude", 1.25);
+    }
 
   render() {
     const self = this;
