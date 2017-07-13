@@ -134,12 +134,12 @@ class LogIn extends React.Component {
 
   signUp = (e) => {
     e.preventDefault();
-    window.location.href = "/signup";
+    this.props.history.push("/signup");
   }
 
   backToHome = (e) => {
     e.preventDefault();
-    window.location.href = "/";
+    this.props.history.push('/')
   }
 
   // facebookLogin = (e) => {

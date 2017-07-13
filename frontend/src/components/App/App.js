@@ -25,10 +25,16 @@ class App extends Component {
     console.log("component did mount")
   }
 
-  requireAuth = (nextState, replace) => {
+  requireAuth = () => {
     console.log('authorized?')
     if (this.props.user.isFetching === true) {
-      history.push('/login')
+      console.log(history.location.pathname, 'location')
+      if(history.location.pathname==='/chat') {
+        history.push('/login')
+      } else if (history.location.pathname==='/') {
+        console.log('come to home')
+        history.push('/')
+      }
     } else {
       history.push('/chat')
     }
