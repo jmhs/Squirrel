@@ -3,8 +3,9 @@ import ReactLoading from 'react-loading';
 import LoadingPage from '../LoadingPage/LoadingPage';
 
 import { connect } from 'react-redux';
-import {sendLong, sendLat} from '../Actions/Chat';
-import {getUser, updateUser} from '../Actions/User'
+import { sendLong, sendLat } from '../Actions/Chat';
+import { getUser, updateUser } from '../Actions/User'
+import { getRoom } from '../Actions/Room'
 
 import axios from 'axios';
 
@@ -51,9 +52,10 @@ class LogIn extends React.Component {
 
     console.log(this.state.loading);
     if (this.state.latitude.toString().length + this.state.longitude.toString().length < 0) {
+      console.log('true ')
       this.state.loading = true;
     } else {
-      this.state.loading = false;
+      setTimeout(()=>{this.state.loading = false;}, 1000)
     };
     console.log(this.state.loading);
   }
@@ -105,6 +107,7 @@ class LogIn extends React.Component {
         }
       }
       this.setState(state);
+      this.props.getRoom(this.state.roomRoute)
     }
 
     // Call loginVerification and chatRoom functions
@@ -120,7 +123,8 @@ class LogIn extends React.Component {
         console.error("AJAX: Logged in @ '/auth/user'");
        this.setState({isLoggedIn: true});
        // this.props.updateUser(data)
-        window.location.href = "/chat" + this.state.roomRoute;
+        // window.location.href = "/chat" + this.state.roomRoute;
+        this.props.history.push('/chat'+this.props.room)
       }
     }).catch((error) => {
       console.error("AJAX: Could not login @ '/auth/login'")
@@ -178,14 +182,16 @@ class LogIn extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    room: state.room
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: () => {dispatch(getUser())},
-    updateUser: (user) => {dispatch(updateUser(user))}
+    updateUser: (user) => {dispatch(updateUser(user))},
+    getRoom: (room) => {dispatch(getRoom(room))}
   }
 }
 

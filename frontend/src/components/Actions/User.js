@@ -12,11 +12,21 @@ export const getUser = () => {
     axios.get('/auth/user')
       .then( (response) => {
         const user = response.data;
-        dispatch(updateUser(user));
+        const notLoggedIn = {}
+          user.isFetching = false
+          console.log('user exists', user.isFetching)
+          dispatch(updateUser(user));
       })
       .catch((error)=> {
         console.error("AJAX: Could not get user @ '/auth/user'")
-        dispatch(updateUser({}));
+        dispatch(updateUser({isFetching: true}));
       });
   };
+}
+
+export const initUser = (user={isFetching: true}) => {
+  return {
+    type: "INIT_USER",
+    user
+  }
 }

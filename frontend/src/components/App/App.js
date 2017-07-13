@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Switch,
 } from 'react-router-dom';
+import { createBrowserHistory } from 'history'
 
 import { connect } from 'react-redux';
-import {getUser} from '../Actions/User'
+import { getUser } from '../Actions/User'
 
 import Chat from '../Chat/Chat'
 import LandingPage from '../LandingPage/LandingPage'
@@ -16,19 +17,31 @@ import LoadingPage from '../LoadingPage/LoadingPage'
 
 import './App.css';
 
+const history = createBrowserHistory()
 class App extends Component {
 
   componentDidMount() {
-    //this.props.getUser()
+    this.props.getUser()
+    console.log("component did mount")
   }
+
+  requireAuth = (nextState, replace) => {
+    console.log('authorized?')
+    if (this.props.user.isFetching === true) {
+      history.push('/login')
+    } else {
+      history.push('/chat')
+    }
+  }
+
   render() {
     const isLoggedIn = this.props.user.isLoggedIn;
     return (
-      <Router>
+      <Router history = {history}>
         <Switch>
           <Route exact path="/" component={LandingPage}/>
-          <Route path="/chat" component={Chat} />
-          <Route path="/login" component={LogIn}/>
+          <Route path="/chat" component={Chat} onEnter={this.requireAuth()}/>
+          <Route path="/login" component={LogIn} />
           <Route path="/signup" component={SignUp}/>
           <Route path="/loadingpage" component={LoadingPage}/>
         </Switch>
@@ -39,7 +52,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        room: state.room
     }
 }
 
