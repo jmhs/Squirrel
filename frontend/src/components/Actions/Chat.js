@@ -5,9 +5,9 @@ export const postMessages = (text) => {
   }
 }
 const io = require('socket.io-client/dist/socket.io.js');
-const socket = io.connect('http://localhost:3001');
-socket.emit("userLongitude", 103.9);
-socket.emit("userLatitude", 1.25);
+export const socket = io.connect('http://localhost:3001');
+// socket.emit("userLongitude", 103.9);
+// socket.emit("userLatitude", 1.25);
 
 
 export const sendMessages = (message) => {

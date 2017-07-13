@@ -6,13 +6,18 @@ import registerServiceWorker from './registerServiceWorker';
 import {browserHistory} from 'react-router'
 //import {syncHistoryWithStore} from 'react-router-redux'
 
-
 // Redux
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import ChatReducer from './components/Reducers/Chat'
 import { initStore } from './components/Store/Store'
 import { getUser, initUser } from './components/Actions/User'
+
+// SSL Config
+// const key = fs.readFileSync('../squirrel-key.pem')
+// const cert = fs.readFileSync('../squirrel-key-csr')
+//
+// const server = require('https').Server(option)
 
 const store = initStore();
 store.subscribe( () => {

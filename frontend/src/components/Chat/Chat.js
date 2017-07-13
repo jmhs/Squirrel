@@ -5,6 +5,10 @@ import ChatField from './ChatField/ChatField';
 //import components
 import NavBar from '../NavBar/NavBar';
 
+import { socket } from '../Actions/Chat';
+import { connect } from 'react-redux';
+import { getUser } from '../Actions/User';
+
 const io = require('socket.io-client/dist/socket.io.js');
 
 
@@ -33,8 +37,11 @@ class Chat extends Component {
   // }
   componentDidMount() {
     // const socket = io.connect('http://localhost:3001');
-    // socket.emit("userLongitude", 103.9);
-    // socket.emit("userLatitude", 1.25);
+    // socket.emit("userLongitude", 103.6);
+    // socket.emit("userLatitude", 1.46);
+    //console.log('chat component did mount', this.props.user)
+    socket.emit("userLongitude", this.props.user.longitude);
+    socket.emit("userLatitude", this.props.user.latitude);
     }
 
   render() {
@@ -47,6 +54,7 @@ class Chat extends Component {
         <div className='row'>
         <div id="mario-chat">
           <ChatField/>
+
           <ChatInput/>
       </div>
     </div>
@@ -56,4 +64,17 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+//export default Chat;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser: () => {dispatch(getUser())}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
