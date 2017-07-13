@@ -5,6 +5,9 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+import {getUser} from '../Actions/User'
+
 import Chat from '../Chat/Chat'
 import LandingPage from '../LandingPage/LandingPage'
 import LogIn from '../LogIn/LogIn'
@@ -13,14 +16,13 @@ import LoadingPage from '../LoadingPage/LoadingPage'
 
 import './App.css';
 
-// const requireAuth = (nextState, replaceState) => {
-//   if(!this.isLoggedIn())
-//   replaceState({nextPathname: nextState.location.pathname}, '/login')
-// }
-// onEnter={requireAuth}
-
 class App extends Component {
+
+  componentDidMount() {
+    //this.props.getUser()
+  }
   render() {
+    const isLoggedIn = this.props.user.isLoggedIn;
     return (
       <Router>
         <Switch>
@@ -35,4 +37,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser: () => {dispatch(getUser())}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// {isLoggedIn ? (<Route path="/chat" component={Chat} />) : (<Route path="/login" component={LogIn}/>)}

@@ -4,6 +4,7 @@ import LoadingPage from '../LoadingPage/LoadingPage';
 
 import { connect } from 'react-redux';
 import {sendLong, sendLat} from '../Actions/Chat';
+import {getUser, updateUser} from '../Actions/User'
 
 import axios from 'axios';
 
@@ -11,7 +12,7 @@ import './LogIn.css';
 
 const io = require('socket.io-client/dist/socket.io.js');
 
-export default class LogIn extends React.Component {
+class LogIn extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +23,7 @@ export default class LogIn extends React.Component {
       longitude: 0,
       loading: true,
       roomRoute: "",
-      //isLoggedIn: false,
+      isLoggedIn: false,
       error: ""
     };
   }
@@ -43,11 +44,11 @@ export default class LogIn extends React.Component {
       this.setState(state)
     }
     getLocation();
-    console.log(this.state.latitude.toString().length);
   }
 
   componentDidMount() {
     var state = this.state;
+
     console.log(this.state.loading);
     if (this.state.latitude.toString().length + this.state.longitude.toString().length < 0) {
       this.state.loading = true;
@@ -64,7 +65,7 @@ export default class LogIn extends React.Component {
 
     state[key] = value;
     console.log(state);
-    // console.log(typeof(this.state.latitude));
+    console.log(typeof(this.state.latitude));
     this.setState(state);
   }
 
@@ -117,8 +118,8 @@ export default class LogIn extends React.Component {
         this.setState({error: data.message, isLoggedIn: false});
       } else {
         console.error("AJAX: Logged in @ '/auth/user'");
-      //  this.setState({isLoggedIn: true});
-      //  console.log(this.state.isLoggedIn);
+       this.setState({isLoggedIn: true});
+       // this.props.updateUser(data)
         window.location.href = "/chat" + this.state.roomRoute;
       }
     }).catch((error) => {
@@ -175,7 +176,20 @@ export default class LogIn extends React.Component {
   }
 }
 
-LogIn.propTypes = {};
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser: () => {dispatch(getUser())},
+    updateUser: (user) => {dispatch(updateUser(user))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
 
 // const mapStateToProps = (userReducer) => {
 //   return

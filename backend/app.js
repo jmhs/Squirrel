@@ -41,6 +41,8 @@ const passportConfig = require('./config/passport');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(cookieParser());
+
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -49,24 +51,31 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-app.use(cookieParser());
-// app.use(lessMiddleware(path.join(__dirname, 'public')));
-// app.use(express.static(path.join(__dirname, 'public')));
-//
-// app.use('/', index);
+
+app.use(lessMiddleware(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', index);
+
+app.use(session({
+  resave: false,
+  saveUninitialized: true,
+  secret: 'hello',
+  store: new MongoStore({
+    url: 'mongodb://localhost/squirreldb',
+    // url: process.env.MONGODB_URI || process.env.MONGODLAB_URI,
+    autoReconnect: true,
+    clear_interval: 3600
+  })
+  //cookie: {maxAge: 3600000}
+}));
 
 // app.use(session({
+//   secret: 'keyboard cat',
 //   resave: false,
 //   saveUninitialized: true,
-//   secret: 'hello',
-//   store: new MongoStore({
-//     url: 'mongodb://localhost/squirreldb',
-//     // url: process.env.MONGODB_URI || process.env.MONGODLAB_URI,
-//     autoReconnect: true,
-//     clear_interval: 3600
-//   })
-//   //cookie: {maxAge: 3600000}
-// }));
+//   cookie: { secure: true }
+// }))
 
 app.use(passport.initialize());
 app.use(passport.session());
