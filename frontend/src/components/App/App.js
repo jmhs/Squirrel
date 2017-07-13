@@ -46,8 +46,13 @@ class App extends Component {
       <Router history = {history}>
         <Switch>
           <Route exact path="/" component={LandingPage}/>
+
           <Route path="/chat" component={Chat} onEnter={this.requireAuth()}/>
           <Route path="/login" component={LogIn} />
+          <Route path="/chat/A" component={Chat} />
+          <Route path="/chat/B" component={Chat} />
+          <Route path="/chat/C" component={Chat} />
+          <Route path="/chat/D" component={Chat} />
           <Route path="/signup" component={SignUp}/>
           <Route path="/loadingpage" component={LoadingPage}/>
         </Switch>

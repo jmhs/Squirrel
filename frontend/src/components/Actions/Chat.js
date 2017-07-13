@@ -4,12 +4,16 @@ export const postMessages = (text) => {
     text
   }
 }
+const io = require('socket.io-client/dist/socket.io.js');
+const socket = io.connect('http://localhost:3001');
+socket.emit("userLongitude", 103.9);
+socket.emit("userLatitude", 1.25);
 
 
 export const sendMessages = (message) => {
   return (dispatch) => {
-    const io = require('socket.io-client/dist/socket.io.js');
-    const socket = io.connect('http://localhost:3001');
+
+
     socket.emit('new-message', { message
     });
     console.log(message)
@@ -21,8 +25,8 @@ export const sendMessages = (message) => {
 
 export const getMessages = () => {
   return (dispatch) => {
-    const io = require('socket.io-client/dist/socket.io.js');
-    const socket = io.connect('http://localhost:3001');
+    //const io = require('socket.io-client/dist/socket.io.js');
+    //const socket = io.connect('http://localhost:3001');
     socket.on('receive-message', (msg) => {
       // console.log('adding new message in store')
       console.log('messages', msg)
@@ -30,4 +34,11 @@ export const getMessages = () => {
   })
 
 }
+}
+
+
+export const chatRoom = () => {
+  return {
+    type: 'CHAT_ROOM'
+  }
 }

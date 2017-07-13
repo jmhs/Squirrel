@@ -23,14 +23,14 @@ class ChatMessages extends React.Component {
         if (messages) {
           // console.log('no. of ', messages)
         {return messages.map((message, index) => {
-          return(
-          <p>
-              <strong>
-              {message.handle}
-              </strong>
-              {message.message}
-          </p>
-          )
+            return(
+              <p>
+                  <strong>
+                  {message.handle + ": " }
+                  </strong>
+                  {message.message}
+              </p>
+            )
         })}
       } else {
         return (
@@ -50,6 +50,7 @@ class ChatMessages extends React.Component {
 ///map state to props
 
 ChatMessages.propTypes = {
+  handle: React.PropTypes.String
 };
 
 const mapStateToProps = (state) => {
