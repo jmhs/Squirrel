@@ -1,0 +1,19 @@
+.Section3 {
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.h2Word {
+  font-family: "Montserrat", arial, sans-serif;
+  font-size: 45px;
+  font-weight: 700;
+  color: black;
+  margin-top: 130px;
+}
+.pWord {
+  font-family: "Montserrat", arial, sans-serif;
+  color: grey;
+  font-weight: 100;
+  margin-top: 0;
+  margin-bottom: 25px;
+}

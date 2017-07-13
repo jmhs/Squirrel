@@ -1,0 +1,35 @@
+.Section5 {
+  text-align: center;
+  background-color: #fafafa;
+  height: 1050px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fh5co-icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 20px;
+}
+.fh5co-icon i {
+  color: #4fd2c2;
+}
+.fh5co-uppercase-sm {
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-family: "Montserrat", arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.designHeading {
+  margin-bottom: 50px;
+}
+.imgPrototype {
+  width: 350px;
+}
+
+.left-text-wrap, .right-text-wrap {
+  margin-top: 50px;
+}

@@ -1,0 +1,24 @@
+.freetryBG {
+  background-color: white;
+  height: 400px;
+  text-align: center;
+  font-family: "Montserrat", arial, sans-serif;
+}
+
+.freeTryHeader {
+  font-weight: 700;
+  font-size: 50px;
+  color: black;
+  margin-top: 100px;
+}
+
+.freeTryWord {
+  color: black;
+  font-weight: 400;
+}
+
+.GetStartedBtn {
+  border-radius: 30px;
+  letter-spacing: 2px;
+  padding: 13px;
+}

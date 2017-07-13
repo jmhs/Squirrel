@@ -1,0 +1,63 @@
+.container {
+  margin-top: 5%;
+  height: 100vh;
+  width: 100vw;
+  padding: 10px 0 0 0;
+  margin: 0;
+  border-color: #43BEB6;
+}
+
+#form {
+  margin: 0 10px 10px 10px;
+}
+
+#or {
+  text-align: center;
+  font-style: italic;
+}
+
+#formHeader {
+  background: #43BEB6;
+  border-color: #43BEB6;
+}
+
+#loginBtnl {
+  margin-top: 10px;
+  background: #43BEB6;
+  border-color: #43BEB6;
+  color: white;
+}
+
+#signupBtnl {
+  background: white;
+  border-color: #43BEB6;
+  color: black;
+  margin-top: 10px;
+}
+
+#homeBtnl {
+  background: white;
+  border-color: #43BEB6;
+  color: black;
+  margin-top: 10px;
+}
+
+
+.panel-primary {
+  border-color: #43BEB6;
+  box-shadow: 2px 2px 2px lightgray;
+}
+
+#currLatitude {
+  display: none;
+}
+
+#currLongitude {
+  display: none;
+}
+button:focus {
+  outline:0;
+}
+input:focus {
+  outline:0;
+}
