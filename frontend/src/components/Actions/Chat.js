@@ -5,7 +5,7 @@ export const postMessages = (text) => {
   }
 }
 const io = require('socket.io-client/dist/socket.io.js');
-export const socket = io.connect('https://ec2-13-59-144-224.us-east-2.compute.amazonaws.com/');
+export const socket = io.connect('https://13.59.144.224/');
 // socket.emit("userLongitude", 103.9);
 // socket.emit("userLatitude", 1.25);
 

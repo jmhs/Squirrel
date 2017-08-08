@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import User from '../models/User';
+import User from '../models/user';
 const router = express.Router();
 /* GET index page. */
 router.get('/user', (req, res, next) => {
