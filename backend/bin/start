@@ -13,7 +13,9 @@ require('babel-polyfill');
 
 const app = require('../app').default;
 const debug = require('debug')('backend:server');
-const http = require('http');
+const https = require('https');
+
+const fs = require('fs');
 
 // import dependencies
 //const mongoose = require('mongoose');
@@ -51,14 +53,23 @@ const normalizePort = function(val) {
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3001');
+const port = normalizePort(process.env.PORT || '443');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-const server = http.createServer(app);
+//const server = http.createServer(app);
+const key = fs.readFileSync('./squirrel-key.pem');
+const cert = fs.readFileSync('./squirrel-cert.pem');
+const option = {
+  key: key,
+  cert: cert
+}
+const server = https.createServer(option, app);
+
+// server.listen(app.get);
 
 /**
  * Listen on provided port, on all network interfaces.

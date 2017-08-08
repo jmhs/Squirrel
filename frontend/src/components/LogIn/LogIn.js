@@ -185,7 +185,6 @@ class LogIn extends React.Component {
                 <label htmlFor="password">Password</label>
                 <input type="password" className="form-control" id="password" placeholder="Please enter password" value={this.state.password} onChange={this.onChange}/>
                 <br />
-                <button type="submit" className="btn btn-primary submit" id="loginBtnl" onClick={this.LocalLogin}>Login</button>
 
 
 
@@ -199,7 +198,10 @@ class LogIn extends React.Component {
                 <input type="number" className="form-control" id="currLongitude" placeholder="Current longitude" value={this.state.longitude} onChange={this.onChange}/>
               </form>
             </div>
+
           </div>
+          <button type="submit" className="btn btn-primary submit" id="loginBtnl" onClick={this.LocalLogin}>Login</button>
+
         </div>
 
       );

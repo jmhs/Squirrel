@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import { stack as Menu } from 'react-burger-menu';
+import {Link} from 'react-router-dom';
 
 // import css
 import './MenuBar.css';
@@ -13,14 +14,16 @@ export default class MenuBar extends React.Component {
     return (
       <div>
         <Menu>
-          <a href="/signup">
+          <Link to="/signup">
+          <a>
             <i className="fa fa-fw fa-lg fa-user-plus"></i>
             <span className="menuLink">Free Sign Up!</span>
-          </a>
-          <a href="/login">
+          </a></Link>
+        <Link to="/login">
+          <a>
             <i className="fa fa-fw fa-lg fa-sign-in"></i>
             <span className="menuLink">Login</span>
-          </a>
+          </a></Link>
           <hr/>
           <a href="#home">
             <i className="fa fa-fw fa-home"></i>
