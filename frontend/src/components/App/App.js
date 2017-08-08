@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
-import {
-  Router,
-  Route,
-  Switch,
-} from 'react-router-dom';
-import { createBrowserHistory } from 'history'
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+//import { Router, Route, browserHistory } from 'react-router'
+import { ConnectedRouter } from 'react-router-redux';
+
+import { createBrowserHistory } from 'history';
 
 import { connect } from 'react-redux';
-import { getUser } from '../Actions/User'
+import { getUser } from '../Actions/User';
 
-import Chat from '../Chat/Chat'
-import LandingPage from '../LandingPage/LandingPage'
-import LogIn from '../LogIn/LogIn'
-import SignUp from '../SignUp/SignUp'
-import LoadingPage from '../LoadingPage/LoadingPage'
-import NotFound from '../NotFound/NotFound'
+import { history } from '../../index';
+
+import Chat from '../Chat/Chat';
+import LandingPage from '../LandingPage/LandingPage';
+import LogIn from '../LogIn/LogIn';
+import SignUp from '../SignUp/SignUp';
+import LoadingPage from '../LoadingPage/LoadingPage';
+import NotFound from '../NotFound/NotFound';
 
 import './App.css';
 
-const history = createBrowserHistory()
+//const history = createBrowserHistory()
 class App extends Component {
 
   componentDidMount() {
@@ -26,39 +29,36 @@ class App extends Component {
     console.log("component did mount")
   }
 
-  requireAuth = () => {
-    console.log('authorized?')
-    if (this.props.user.isFetching === true) {
-      console.log(history.location.pathname, 'location')
-      if(history.location.pathname==='/chat') {
-        history.push('/login')
-      } else if (history.location.pathname==='/') {
-        console.log('come to home')
-        history.push('/')
-      }
-    } else {
-      history.push('/chat')
-    }
-  }
+  // requireAuth = () => {
+  //   console.log('authorized?')
+  //   if (this.props.user === true) {
+  //     console.log(this.props.user)
+  //     if(history.location.pathname==='/chat') {
+  //       history.push('/login')
+  //     } else if (history.location.pathname==='/') {
+  //       console.log('come to home')
+  //       history.push('/')
+  //     }
+  //   } else {
+  //     history.push('/chat')
+  //   }
+  // }
 
   render() {
-    const isLoggedIn = this.props.user.isLoggedIn;
+    // const isLoggedIn = this.props.user.isLoggedIn;
     return (
-      <Router history = {history}>
+      <div>
+      <ConnectedRouter history={history}>
         <Switch>
           <Route exact path="/" component={LandingPage}/>
-
-          <Route path="/chat" component={Chat} onEnter={this.requireAuth()}/>
+          <Route path="/chat" component={Chat} /> :
           <Route path="/login" component={LogIn} />
-          <Route path="/chat/A" component={Chat} />
-          <Route path="/chat/B" component={Chat} />
-          <Route path="/chat/C" component={Chat} />
-          <Route path="/chat/D" component={Chat} />
           <Route path="/signup" component={SignUp}/>
           <Route path="/loadingpage" component={LoadingPage}/>
           <Route component={NotFound}/>
         </Switch>
-      </Router>
+      </ConnectedRouter>
+    </div>
     );
   }
 }

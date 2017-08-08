@@ -4,6 +4,10 @@ import ChatReducer from '../Reducers/Chat'
 import UserReducer from '../Reducers/User'
 import RoomReducer from '../Reducers/Room'
 
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+
+
 export let initStore = () => {
 
   const reducer = combineReducers( {
@@ -12,10 +16,13 @@ export let initStore = () => {
     room: RoomReducer
   });
 
+  const history = createHistory();
+  const historyWare = routerMiddleware(history);
+
   const store = createStore( reducer, compose(
-    applyMiddleware(thunk),
+    applyMiddleware(thunk,historyWare),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
 
-  return store;
+  return [store, history];
 }
