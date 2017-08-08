@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import LoadingPage from '../LoadingPage/LoadingPage';
+import {Link} from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -103,8 +104,12 @@ export default class SignUp extends React.Component {
               <input type="password" className="form-control" id="password" placeholder="Please enter password" value={this.state.password} onChange={this.onChange}/>
               <br/>
               <button type="submit" className="btn btn-default submit" id="signupBtn" onClick={this.localSignup}>Sign me up!</button>
+              <Link to="/login">
               <button type="submit" className="btn btn-primary submit" id="loginBtn" onClick={this.backToLogin}>Back to Login</button>
+              </Link>
+              <Link to="/">
               <button type="submit" className="btn btn-default submit" id="homeBtn" onClick={this.backToHome}>Back To Home</button>
+              </Link>
               <input type="number" className="form-control" id="currLatitude" placeholder="Current latitude" value={this.state.latitude} onChange={this.onChange}/>
               <input type="number" className="form-control" id="currLongitude" placeholder="Current longitude" value={this.state.longitude} onChange={this.onChange}/>
             </form>

@@ -9,7 +9,7 @@ import { socket } from '../Actions/Chat';
 import { connect } from 'react-redux';
 import { getUser } from '../Actions/User';
 
-const io = require('socket.io-client/dist/socket.io.js');
+//const io = require('socket.io-client/dist/socket.io.js');
 
 
 class Chat extends Component {

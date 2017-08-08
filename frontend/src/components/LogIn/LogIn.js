@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react';
 import ReactLoading from 'react-loading';
 import LoadingPage from '../LoadingPage/LoadingPage';
-
+import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { sendLong, sendLat } from '../Actions/Chat';
-import { getUser, updateUser } from '../Actions/User';
+import { getUser, updateUser, localLogin } from '../Actions/User';
 import { getRoom } from '../Actions/Room';
 import {chatRoom} from '../Actions/Chat';
 
@@ -14,7 +14,7 @@ import axios from 'axios';
 
 import './LogIn.css';
 
-const io = require('socket.io-client/dist/socket.io.js');
+//const io = require('socket.io-client/dist/socket.io.js');
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class LogIn extends React.Component {
       password: "",
       latitude: 0,
       longitude: 0,
-      loading: true,
+      loading: false,
       roomRoute: "",
       error: "",
       chatRoom: ""
@@ -82,73 +82,71 @@ class LogIn extends React.Component {
 
     state[key] = value;
     console.log(state);
-    console.log(typeof(this.state.latitude));
+    //console.log(typeof(this.state.latitude));
     this.setState(state);
   }
 
-  localLogin = (e) => {
-    e.preventDefault();
+  LocalLogin = () => {
+    console.log("We are at LocalLogins")
+    if(this.state.email == "" || this.state.password == ""){
+      console.log("either the email or the password is empty");
+      // e.preventDefault();
+    }else {
+      let data1 = {
+        email: this.state.email,
+        password: this.state.password
+      }
+      console.log("Login.js Login", data1)
+      this.props.Login(data1);
 
-    var state = this.state
+    }
+
+
+
+    //e.preventDefault();
+
+    //var state = this.state
     //connect to the back to send the longitude and latitude
     // const socket = io.connect('http://localhost:3001');
     // socket.emit("userLongitude", this.state.longitude);
     // socket.emit("userLatitude", this.state.latitude);
 
 
-    const chatRoom = () => {
+    //const chatRoom = () => {
 
-      if (this.state.latitude !== 0) {
-        if (this.state.latitude < 1.473298 && this.state.latitude > 1.352083) {
-          if (this.state.longitude < 104.021301 && this.state.longitude > 103.819836) {
-            // go to room B
-            state.roomRoute = "/B";
-            state.chatRoom = "roomB";
-          } else {
-            // go to room A
-            state.roomRoute = "/A";
-            state.chatRoom = "roomA";
-          }
-        } else if (this.state.latitude < 1.352083 && this.state.latitude > 1.230868) {
-          if (this.state.longitude < 103.819836 && this.state.longitude > 103.596681) {
-            // go to room C
-            state.roomRoute = "/C";
-            state.chatRoom = "roomC";
-          } else {
-            // go to room D
-            state.roomRoute = "/D";
-            state.chatRoom = "roomD";
-          }
-        } else {
-          // go to default /chat
-          state.roomRoute = "/";
-        }
-      }
-      this.setState(state);
-      this.props.getRoom(this.state.roomRoute)
-    }
+    //   if (this.state.latitude !== 0) {
+    //     if (this.state.latitude < 1.473298 && this.state.latitude > 1.352083) {
+    //       if (this.state.longitude < 104.021301 && this.state.longitude > 103.819836) {
+    //         // go to room B
+    //         state.roomRoute = "/B";
+    //         state.chatRoom = "roomB";
+    //       } else {
+    //         // go to room A
+    //         state.roomRoute = "/A";
+    //         state.chatRoom = "roomA";
+    //       }
+    //     } else if (this.state.latitude < 1.352083 && this.state.latitude > 1.230868) {
+    //       if (this.state.longitude < 103.819836 && this.state.longitude > 103.596681) {
+    //         // go to room C
+    //         state.roomRoute = "/C";
+    //         state.chatRoom = "roomC";
+    //       } else {
+    //         // go to room D
+    //         state.roomRoute = "/D";
+    //         state.chatRoom = "roomD";
+    //       }
+    //     } else {
+    //       // go to default /chat
+    //       state.roomRoute = "/";
+    //     }
+    //   }
+    //   this.setState(state);
+    //   this.props.getRoom(this.state.roomRoute)
+    // }
 
     // Call loginVerification and chatRoom functions
     //loginVerification();
-    chatRoom();
-
-    axios.post('/auth/login', this.state).then((response) => {
-      let data = response.data;
-      if (data.error) {
-        console.log(data.message)
-        //this.setState({error: data.message, isLoggedIn: false});
-      } else {
-        console.error("AJAX: Logged in @ '/auth/user'");
-      //  this.setState({isLoggedIn: true});
-        this.props.updateUser(data)
-       // this.props.getUser()
-        // window.location.href = "/chat" + this.state.roomRoute;
-        this.props.history.push('/chat'+this.props.room)
-      }
-    }).catch((error) => {
-      console.error("AJAX: Could not login @ '/auth/login'")
-      this.setState({error: "Login error, notify the dev team!"});
-    });
+    //chatRoom();
   }
 
   signUp = (e) => {
@@ -158,7 +156,10 @@ class LogIn extends React.Component {
 
   backToHome = (e) => {
     e.preventDefault();
-    this.props.history.push('/')
+    return (
+      <Link to='/'></Link>
+    )
+    this.props.history.push('/');
   }
 
   // facebookLogin = (e) => {
@@ -168,9 +169,9 @@ class LogIn extends React.Component {
 
   // currLatitude and currLongitude are "display:none". Lat and Long values are in the input fields for the purpose of AXIOS PUT function. Whenever user logs in, the LAT and LONG are updated for his account.
   render() {
-    if (this.state.loading) {
-      return <LoadingPage/>;
-    } else {
+    // if (this.state.loading) {
+    //   return <LoadingPage/>;
+    // } else {
       return (
 
         <div className="container">
@@ -184,18 +185,25 @@ class LogIn extends React.Component {
                 <label htmlFor="password">Password</label>
                 <input type="password" className="form-control" id="password" placeholder="Please enter password" value={this.state.password} onChange={this.onChange}/>
                 <br />
-                <button type="submit" className="btn btn-primary submit" id="loginBtnl" onClick={this.localLogin}>Login</button>
-                <button type="submit" className="btn btn-default submit" id="signupBtnl" onClick={this.signUp}>Don't have an account yet? Sign up here!</button>
-                <button type="submit" className="btn btn-default submit" id="homeBtnl" onClick={this.backToHome}>Back to home</button>
+
+
+
+                <Link to ="/signup">
+                <button type="submit" className="btn btn-default submit" id="signupBtnl">Don't have an account yet? Sign up here!</button>
+                </Link>
+                <Link to ="/">
+                <button type="submit" className="btn btn-default submit" id="homeBtnl">Back to home</button>
+                </Link>
                 <input type="number" className="form-control" id="currLatitude" placeholder="Current latitude" value={this.state.latitude} onChange={this.onChange}/>
                 <input type="number" className="form-control" id="currLongitude" placeholder="Current longitude" value={this.state.longitude} onChange={this.onChange}/>
               </form>
             </div>
+            <button type="submit" className="btn btn-primary submit" id="loginBtnl" onClick={this.LocalLogin}>Login</button>
           </div>
         </div>
 
       );
-    }
+    // }
   }
 }
 
@@ -209,6 +217,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    Login: (credentials) => {dispatch(localLogin(credentials));},
     getUser: () => {dispatch(getUser())},
     updateUser: (user) => {dispatch(updateUser(user))},
     getRoom: (room) => {dispatch(getRoom(room))},
