@@ -119,44 +119,48 @@ io.on('connection', (socket) =>{
   });
 
   });
+  socket.on('new-message', (msg) => {
+    console.log(msg)
+    io.emit("receive-message", msg);
+  });
 
   // handle chat messages for room A
-  socket.on('new-message', (msg) => {
-    console.log(msg)
-    io.to('roomA').emit("receive-message", msg);
-  });
+  // socket.on('new-message', (msg) => {
+  //   console.log(msg)
+  //   io.to('roomA').emit("receive-message", msg);
+  // });
   // handle chat messages for room B
-  socket.on('new-message', (msg) => {
-    console.log(msg)
-    io.to('roomB').emit("receive-message", msg);
-  });
+  // socket.on('new-message', (msg) => {
+  //   console.log(msg)
+  //   io.to('roomB').emit("receive-message", msg);
+  // });
   // handle chat messages for room C
-  socket.on('new-message', (msg) => {
-    console.log(msg)
-    io.to('roomC').emit("receive-message", msg);
-  });
+  // socket.on('new-message', (msg) => {
+  //   console.log(msg)
+  //   io.to('roomC').emit("receive-message", msg);
+  // });
   // handle chat messages for room D
-  socket.on('new-message', (msg) => {
-    console.log(msg)
-    io.to('roomD').emit("receive-message", msg);
-  });
+  // socket.on('new-message', (msg) => {
+  //   console.log(msg)
+  //   io.to('roomD').emit("receive-message", msg);
+  // });
 
   // handle typing message notification for room A
   socket.on('typing', (data) => {
-    socket.broadcast.to('roomA').emit('typing', data);
+    socket.broadcast.emit('typing', data);
   });
   // handle typing message notification for room B
-  socket.on('typing', (data) => {
-    socket.broadcast.to('roomB').emit('typing', data);
-  });
+  // socket.on('typing', (data) => {
+  //   socket.broadcast.to('roomB').emit('typing', data);
+  // });
   // handle typing message notification for room C
-  socket.on('typing', (data) => {
-    socket.broadcast.to('roomC').emit('typing', data);
-  });
+  // socket.on('typing', (data) => {
+  //   socket.broadcast.to('roomC').emit('typing', data);
+  // });
   // handle typing message notification for room D
-  socket.on('typing', (data) => {
-    socket.broadcast.to('roomD').emit('typing', data);
-  });
+  // socket.on('typing', (data) => {
+  //   socket.broadcast.to('roomD').emit('typing', data);
+  // });
 
 
 });

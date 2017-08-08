@@ -13,13 +13,14 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', { failur
 });
 // LOGIN
 router.post('/login', function(req, res, next) {
+    console.log(req)
     passport.authenticate('local', function(error, user, info) {
         if(error) {
             console.log(error);
             return res.json({'error':'database','message': "Something went seriously wrong. Contact the dev team."});
         }
         if(!user) {
-          return res.json({'error':'user','message': "Wrong password or email"})
+          return res.json({'error':'user','message': "Wrong password or email backend"})
         }
         req.logIn(user, function(err) {
             if (err) {
@@ -30,7 +31,7 @@ router.post('/login', function(req, res, next) {
             user.longitude = req.body.longitude;
             user.save((err, user) => {
               if (err) return res.json({'error':'database','message': err});
-              //console.log(user)
+              console.log('User in Backend',user)
               return res.json(user)
             });
             //return res.json(user)

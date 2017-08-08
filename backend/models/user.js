@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema({
   userSchema.pre('save', function save(next) {
 
     console.log('pre save hook');
+    console.log(this)
     const user = this;
     if (!user.isModified('password')) { return next(); } //ismodified is a flag to see if something has changed
     console.log('password is modified');
